@@ -10,7 +10,7 @@ class Espacios(models.Model):
     id_espacio = models.IntegerField()
     capacidad_espacio = models.IntegerField()
     estado_espacio = models.CharField(max_length=10,default="Disponible")
-    foto_espacio = models.CharField(max_length=1000)
+    foto_espacio = models.ImageField()
 
     def __str__(self):
         return self.nombre_espacio
