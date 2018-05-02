@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'depachi.apps.DepachiConfig',
+    'espacios.apps.EspaciosConfig',
+    'articulos.apps.ArticulosConfig',
 ]
 
 MIDDLEWARE = [
