@@ -52,6 +52,5 @@ fabric.properties
 
 
 .DS_Store
-
-venv/
 .idea/
+venv/
