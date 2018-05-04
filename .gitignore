@@ -54,3 +54,4 @@ fabric.properties
 .DS_Store
 .idea/
 venv/
+__pycache__/
