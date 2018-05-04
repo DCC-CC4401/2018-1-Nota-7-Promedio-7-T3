@@ -1,10 +1,11 @@
 from django.db import models
 
-# Create your models here.
+
 class Articulos(models.Model):
 
+    ESTADOS_ART = ((1, 'Disponible'), (2, 'Prestado'), (3, 'Reparación'), (4, 'Perdido'))
+    estado_articulo = models.IntegerField(choices=ESTADOS_ART, default=1)
     nombre_articulo = models.CharField(max_length=200)
     descripcion_articulo = models.CharField(max_length=1500)
     id_articulo = models.IntegerField()
-    estado_articulo = models.CharField(max_length=10, default="Disponible")
     foto_articulo = models.ImageField()
