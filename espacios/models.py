@@ -9,7 +9,7 @@ class Espacios(models.Model):
     descripcion_espacio = models.CharField(max_length=1500)
     id_espacio = models.IntegerField()
     capacidad_espacio = models.IntegerField()
-    foto_espacio = models.ImageField()
+    foto_espacio = models.ImageField(upload_to='uploads/fotos_espacios')
 
     def __str__(self):
         return self.nombre_espacio
