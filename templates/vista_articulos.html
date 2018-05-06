@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+    html, body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        font-family: 'Roboto', sans-serif;
+}
+    div#logo {
+        float: left;
+}
+
+    div#navmenu {
+        float: right;
+}
+    .container {
+        overflow: hidden;
+}
+    .left-column {
+        width: 50%;
+        margin-left: 100px;
+        float:left;
+}
+
+    .right-column {
+        float:right;
+        width:40%;
+    }
+    p {
+        font-size: 16px;
+        font-weight: 300;
+        color: #86939E;
+        line-height: 24px;
+}
+    h1 {
+        font-weight: 300;
+        font-size: 40px;
+        color: #43484D;
+        letter-spacing: -2px;
+}
+    .resize_fit_center {
+        max-width:40%;
+        max-height:40%;
+        vertical-align: middle;
+}
+    .descripcion {
+        border: dashed 1px black;
+    }
+</style>
+</head>
+<div id="navbar">
+ <div id="logo">Logo</div>
+ <div id="navmenu">Nav menu</div>
+</div>
+<br/>
+<hr>
+
+<main class="container">
+  <!-- Left Column -->
+  <div class="left-column">
+      <div class="product-description">
+      <h1>{{ nombre }} {{ estado }}</h1>
+          <br/>
+          <img class='resize_fit_center' src='https://pbs.twimg.com/profile_images/378800000822867536/3f5a00acf72df93528b6bb7cd0a4fd0c_400x400.jpeg' />
+          <br/>
+          <br/>
+          <div class="descripcion">
+          <p>{{ descripcion }}</p>
+          </div>
+    </div>
+  </div>
+
+
+  <!-- Right Column -->
+  <div class="right-column">
+    <!-- Descripcion Articulo -->
+    <a href="#" class="cart-btn">Reservar</a>
+  </div>
+</main>
+</html>

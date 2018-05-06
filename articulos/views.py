@@ -1,10 +1,14 @@
 from django.shortcuts import render
-
+from .models import Articulos
 # Create your views here.
-from django.http import HttpResponse
 
-def index(request):
-    return HttpResponse("Hello, world.")
 
 def id_articulo(request, id_articulo):
-    return HttpResponse("Hello, world. You're record is: "+str(id_articulo))
+    articulo = Articulos.objects.get(id_articulo=id_articulo)
+    nombre = articulo.nombre_articulo
+    estado = articulo.estado_articulo
+    descripcion = articulo.descripcion_articulo
+    foto = articulo.foto_articulo
+    id_art = articulo.id_articulo
+    context = {'nombre': nombre, 'estado': estado, 'descripcion': descripcion, 'foto': foto, 'id': id_art}
+    return render(request, 'vista_articulos.html', context)
