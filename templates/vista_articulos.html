@@ -25,6 +25,7 @@
 }
 
     .right-column {
+        margin-top: 30px;
         float:right;
         width:40%;
     }
@@ -40,6 +41,12 @@
         color: #43484D;
         letter-spacing: -2px;
 }
+    h2 {
+        font-weight: 300;
+        font-size: 18px;
+        color: #43484D;
+}
+
     .resize_fit_center {
         max-width:40%;
         max-height:40%;
@@ -47,6 +54,20 @@
 }
     .descripcion {
         border: dashed 1px black;
+    }
+
+    .caja_reserva {
+        position: relative;
+        min-height: 100px;
+        width: 60%;
+        border: solid 1px black;
+    }
+    .caja_historial {
+        position: relative;
+        min-height: 100px;
+        width: 60%;
+        border: solid 1px black;
+        overflow: scroll;
     }
 </style>
 </head>
@@ -63,6 +84,7 @@
       <div class="product-description">
       <h1>{{ nombre }} {{ estado }}</h1>
           <br/>
+          <!-- No se poner fotos -->
           <img class='resize_fit_center' src='https://pbs.twimg.com/profile_images/378800000822867536/3f5a00acf72df93528b6bb7cd0a4fd0c_400x400.jpeg' />
           <br/>
           <br/>
@@ -76,7 +98,20 @@
   <!-- Right Column -->
   <div class="right-column">
     <!-- Descripcion Articulo -->
-    <a href="#" class="cart-btn">Reservar</a>
+      <h2>Solicitar Reserva</h2>
+      <div class="caja_reserva">
+          <form action="">
+              <h2>Fecha: <input type="date"></h2>
+              <h2>Hora:<input type="time"></h2>
+              <p align="right">
+              <input type="submit" value="Pedir">
+              </p>
+          </form>
+      </div>
+      <h2>Historial Reservas</h2>
+            <div class="caja_historial">
+
+            </div>
   </div>
 </main>
 </html>
