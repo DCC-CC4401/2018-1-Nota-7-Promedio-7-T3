@@ -16,8 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from articulos import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('articulos/<int:id_articulo>/', views.id_articulo, name='id_articulo'),
+    path('login/', auth_views.login, name='login'),
+    path('logout/', auth_views.logout, name='logout'),
 ]
