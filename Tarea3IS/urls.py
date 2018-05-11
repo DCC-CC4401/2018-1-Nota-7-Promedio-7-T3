@@ -19,11 +19,13 @@ from articulos import views
 from django.contrib.auth import views as auth_views
 from django.contrib.staticfiles.urls import static
 from django.conf import settings
+from userprofile import views as userprofileviews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('articulos/<int:id_articulo>/', views.id_articulo, name='id_articulo'),
     path('login/', auth_views.login, name='login'),
     path('logout/', auth_views.logout, name='logout'),
+    path('perfil/', userprofileviews.perfilUsuario, name = 'perfilUsuario'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
