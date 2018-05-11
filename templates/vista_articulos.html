@@ -71,13 +71,8 @@
     }
 </style>
 </head>
-<div id="navbar">
- <div id="logo">Logo</div>
- <div id="navmenu">Nav menu</div>
-</div>
-<br/>
-<hr>
-
+{% extends "TopBar.html" %}
+{% block content %}
 <main class="container">
   <!-- Left Column -->
   <div class="left-column">
@@ -85,7 +80,7 @@
       <h1>{{ nombre }} {{ estado }}</h1>
           <br/>
           <!-- No se poner fotos -->
-          <img class='resize_fit_center' src='https://pbs.twimg.com/profile_images/378800000822867536/3f5a00acf72df93528b6bb7cd0a4fd0c_400x400.jpeg' />
+          <img class='resize_fit_center' src={{ foto.url }} />
           <br/>
           <br/>
           <div class="descripcion">
@@ -93,7 +88,6 @@
           </div>
     </div>
   </div>
-
 
   <!-- Right Column -->
   <div class="right-column">
@@ -114,4 +108,5 @@
             </div>
   </div>
 </main>
+{% endblock %}
 </html>
