@@ -8,13 +8,17 @@
         margin: 0;
         font-family: 'Roboto', sans-serif;
 }
-    div#logo {
-        float: left;
-}
-
-    div#navmenu {
-        float: right;
-}
+    /*Color del texto en el estado*/
+    .Disponible {
+        display: inline-block;
+        background:green;
+        border-radius: 6px;
+        text-align: center;
+        color:white}
+    .Prestado {color:red}
+    .Reparación {color:yellow}
+    .Perdido{color:orangered}
+    /*Color del texto en el estado*/
     .container {
         overflow: hidden;
 }
@@ -77,9 +81,9 @@
   <!-- Left Column -->
   <div class="left-column">
       <div class="product-description">
-      <h1>{{ nombre }} {{ estado }}</h1>
+      <h1>{{ nombre }} &nbsp <span class="{{ estado }}">&nbsp< {{ estado }} &nbsp</span></h1>
           <br/>
-          <!-- No se poner fotos -->
+          <!-- Foto -->
           <img class='resize_fit_center' src={{ foto.url }} />
           <br/>
           <br/>
