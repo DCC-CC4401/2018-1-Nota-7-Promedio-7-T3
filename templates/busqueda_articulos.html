@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
+
+{% extends "TopBar.html" %}
+{% block content %}
 
 <h1>Búsqueda de artículos</h1>
 
@@ -28,5 +30,6 @@
 
 {% endfor %}
 </ul>
-</body>
+{% endblock %}
+
 </html>
