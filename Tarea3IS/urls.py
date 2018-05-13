@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from articulos import views
+from userlanding import views as user_views
 from django.contrib.auth import views as auth_views
 from django.contrib.staticfiles.urls import static
 from django.conf import settings
@@ -23,6 +24,7 @@ from userprofile import views as userprofileviews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('user/busqueda/', user_views.busqueda, name='nombre_articulo'),
     path('articulos/<int:id_articulo>/', views.id_articulo, name='id_articulo'),
     path('login/', auth_views.login, name='login'),
     path('logout/', auth_views.logout, name='logout'),

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Búsqueda de artículos</h1>
+
+<form method="GET" action="">
+    <input type="text" name="nombre" placeholder="Buscar articulos"/> <br>
+    <select name="estado">
+        <option value="0">Seleccione un estado</option>
+        <option value="1">Disponible</option>
+        <option value="2">Prestado</option>
+        <option value="3">En reparación</option>
+        <option value="4">Perdido</option>
+
+    </select> <br>
+    <input type="submit" value="Buscar"/>
+</form>
+
+<ul>
+{%for articulo in resultados %}
+
+    <li>{{ articulo.nombre_articulo }}</li>
+
+{% endfor %}
+</ul>
+</body>
+</html>
