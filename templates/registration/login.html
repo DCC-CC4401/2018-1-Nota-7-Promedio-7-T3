@@ -6,10 +6,12 @@
 </head>
 <body>
 
+{% extends "TopBar.html" %}
+{% block content %}
 
 {% block title %}Login{% endblock %}
 
-{% block content %}
+
   <h2>Login</h2>
   <form method="post">
     {% csrf_token %}
@@ -19,4 +21,5 @@
 {% endblock %}
 
 </body>
+
 </html>
