@@ -11,4 +11,7 @@ def id_articulo(request, id_articulo):
     foto = articulo.foto_articulo
     id_art = articulo.id_articulo
     context = {'nombre': nombre, 'estado': estado, 'descripcion': descripcion, 'foto': foto, 'id': id_art}
-    return render(request, 'vista_articulos.html', context)
+    if request.user.is_superuser:
+        return render(request, 'vista_articulos_admin.html', context)
+    else:
+        return render(request, 'vista_articulos_usuarios.html', context)
