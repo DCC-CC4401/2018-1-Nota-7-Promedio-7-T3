@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'espacios.apps.EspaciosConfig',
     'articulos.apps.ArticulosConfig',
-    'reservaArt.apps.ReservaartConfig',
     'userprofile.apps.UserprofileConfig',
+    'reservas.apps.ReservasConfig',
 ]
 
 MIDDLEWARE = [
