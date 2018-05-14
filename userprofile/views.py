@@ -5,11 +5,14 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from userprofile.forms import SignUpForm
+from userprofile.models import Perfil
 
 # Create your views here.
 
 def perfilUsuario(request):
-    return render(request, 'vista_perfil.html')
+    perfil = Perfil.objects.get(correo=request.user.id)
+    context ={'perfil': perfil}
+    return render(request, 'vista_perfil.html', context)
 
 def signup(request):
     if request.method == 'POST':
