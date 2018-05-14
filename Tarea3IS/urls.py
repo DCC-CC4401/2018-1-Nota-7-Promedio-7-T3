@@ -34,7 +34,7 @@ urlpatterns = [
     path('register/', userprofileviews.signup, name = 'register'),
     path('home/', userprofileviews.index, name = 'home'),
     path('', userprofileviews.redirectToHome),
-    path('espacios/', espaciosviews.EspaciosView.espaciosV()),
+    #path('espacios/', espaciosviews.EspaciosView.espaciosV()),
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
