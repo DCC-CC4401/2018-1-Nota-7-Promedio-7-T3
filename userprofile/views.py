@@ -43,3 +43,6 @@ def index(request):
             return busqueda(request)
     else:
         return auth_views.login(request)
+
+def redirectToHome(request):
+    return redirect('home')
