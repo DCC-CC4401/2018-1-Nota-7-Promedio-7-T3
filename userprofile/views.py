@@ -6,6 +6,8 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from userprofile.forms import SignUpForm
 from userprofile.models import Perfil
+from userlanding.views import busqueda
+from django.contrib.auth import views as auth_views
 
 # Create your views here.
 
@@ -30,3 +32,10 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
+
+
+def index(request):
+    if request.user.is_authenticated:
+        return busqueda(request)
+    else:
+        return auth_views.login(request)
