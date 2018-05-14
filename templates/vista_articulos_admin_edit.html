@@ -106,7 +106,7 @@
     <main class="container">
         <!-- Left Column -->
         <div class="left-column">
-            <h1><span class="Nombre">{{ nombre }}</span> &nbsp <span class="{{ estado }}"> &nbsp {{ estado }} &nbsp</span></h1>
+            <h1><span class="Nombre">{{ nombre }} </span> &nbsp <span class="{{ estado }}"> &nbsp {{ estado }} &nbsp</span></h1>
             <br/>
             <br/>
             <!-- Foto -->
@@ -121,9 +121,9 @@
   <!-- Right Column -->
   <div class="right-column">
       <div class="caja_reserva">
-          <form action="edit" method="post">{% csrf_token %}
+          <form action="/articulos/{{ id }}/" method="post">{% csrf_token %}
               <p align="left">
-              <input type="submit" value="Modificar" name="modificar">
+              <input type="submit" value="Guardar" name="guardar">
               </p>
           </form>
       </div>
