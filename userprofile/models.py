@@ -13,7 +13,7 @@ class Perfil(models.Model):
     habilitado = models.BooleanField()
 
     def __str__(self):
-        return self.correo
+        return self.correo.username
 
 
 @receiver(post_save, sender=User)

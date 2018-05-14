@@ -69,7 +69,11 @@
 
 <body>
 
+{% if perfil.habilitado %}
 <h1> Estado de Usuario: Habilitado </h1>
+{% else %}
+<h1> Estado de Usuario: Inhabilitado </h1>
+{% endif %}
 
 
 <!-- Tab links -->
