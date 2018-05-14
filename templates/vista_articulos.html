@@ -8,17 +8,43 @@
         margin: 0;
         font-family: 'Roboto', sans-serif;
 }
-    /*Color del texto en el estado*/
+    .Nombre{
+        overflow:auto;
+        width:300px;
+        min-height:50px;
+        max-height: 200px;
+        float:left;
+    }
+    /*Color del texto en el estado, aparece como no usado, pero se llama al renderizar*/
     .Disponible {
         display: inline-block;
         background:green;
         border-radius: 6px;
         text-align: center;
-        color:white}
-    .Prestado {color:red}
-    .Reparación {color:yellow}
-    .Perdido{color:orangered}
-    /*Color del texto en el estado*/
+        color:white
+    }
+    .Prestado {
+        display: inline-block;
+        background:blue;
+        border-radius: 6px;
+        text-align: center;
+        color:white
+    }
+    .Reparación {
+        display: inline-block;
+        background:darkorange;
+        border-radius: 6px;
+        text-align: center;
+        color:white
+    }
+    .Perdido{
+        display: inline-block;
+        background:darkred;
+        border-radius: 6px;
+        text-align: center;
+        color:white
+    }
+    /*-------------------*/
     .container {
         overflow: hidden;
 }
@@ -77,21 +103,20 @@
 </head>
 {% extends "TopBar.html" %}
 {% block content %}
-<main class="container">
-  <!-- Left Column -->
-  <div class="left-column">
-      <div class="product-description">
-      <h1>{{ nombre }} &nbsp <span class="{{ estado }}">&nbsp {{ estado }} &nbsp</span></h1>
-          <br/>
-          <!-- Foto -->
-          <img class='resize_fit_center' src={{ foto.url }} />
-          <br/>
-          <br/>
-          <div class="descripcion">
-          <p>{{ descripcion }}</p>
-          </div>
-    </div>
-  </div>
+    <main class="container">
+        <!-- Left Column -->
+        <div class="left-column">
+            <h1><span class="Nombre">{{ nombre }}</span> &nbsp <span class="{{ estado }}"> &nbsp {{ estado }} &nbsp</span></h1>
+            <br/>
+            <br/>
+            <!-- Foto -->
+            <img class='resize_fit_center' src={{ foto.url }} />
+            <br/>
+            <br/>
+            <div class="descripcion">
+                <p>{{ descripcion }}</p>
+            </div>
+        </div>
 
   <!-- Right Column -->
   <div class="right-column">
