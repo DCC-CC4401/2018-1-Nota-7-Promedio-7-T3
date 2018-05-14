@@ -16,10 +16,12 @@ class Perfil(models.Model):
         return self.correo.username
 
 
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Perfil.objects.create(correo=instance, habilitado=1)
+
 
 
 @receiver(post_save, sender=User)
