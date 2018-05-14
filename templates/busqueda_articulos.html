@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Búsqueda de artículos</title>
 </head>
 
 {% extends "TopBar.html" %}
@@ -26,7 +26,7 @@
 <ul>
 {%for articulo in resultados %}
 
-    <li>{{ articulo.nombre_articulo }}</li> <br>
+    <li>{{ articulo.nombre_articulo }}, {{ articulo.id }}</li> <br>
 
 {% endfor %}
 </ul>
