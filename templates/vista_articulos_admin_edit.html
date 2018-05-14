@@ -104,19 +104,19 @@
 {% extends "TopBar.html" %}
 {% block content %}
     <main class="container">
+        <form>
         <!-- Left Column -->
         <div class="left-column">
-            <h1><span class="Nombre">{{ nombre }} </span> &nbsp <span class="{{ estado }}"> &nbsp {{ estado }} &nbsp</span></h1>
+            <h1><input type="text" value="{{ nombre }}">&nbsp <span class="{{ estado }}"> &nbsp {{ estado }} &nbsp</span></h1>
             <br/>
             <br/>
             <!-- Foto -->
-            <img class='resize_fit_center' src={{ foto.url }} />
+            <input type="file">
             <br/>
             <br/>
-            <div class="descripcion">
-                <p>{{ descripcion }}</p>
-            </div>
+            <input type="text" value="{{ descripcion }}">
         </div>
+        </form>
 
   <!-- Right Column -->
   <div class="right-column">
