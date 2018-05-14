@@ -26,7 +26,7 @@
 <ul>
 {%for articulo in resultados %}
 
-    <li>{{ articulo.nombre_articulo }}, {{ articulo.id }}</li> <br>
+    <a href="/articulos/{{ articulo.id }}">{{ articulo.nombre_articulo }}</a> <br>
 
 {% endfor %}
 </ul>
