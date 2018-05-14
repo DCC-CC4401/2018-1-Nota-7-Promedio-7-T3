@@ -6,7 +6,6 @@ from userprofile.models import Perfil
 
 def id_articulo(request, id_articulo):
     perfil = Perfil.objects.get(correo=request.user.id)
-    print(perfil.nombre)
     articulo = Articulos.objects.get(pk=id_articulo)
     nombre = articulo.nombre_articulo
     estado = articulo.ESTADOS_ART[articulo.estado_articulo-1][1]
