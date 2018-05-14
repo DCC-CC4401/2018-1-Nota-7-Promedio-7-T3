@@ -8,6 +8,7 @@ from userprofile.forms import SignUpForm
 from userprofile.models import Perfil
 from userlanding.views import busqueda
 from django.contrib.auth import views as auth_views
+from django.http import HttpResponse, HttpResponseNotFound
 
 # Create your views here.
 
@@ -36,6 +37,9 @@ def signup(request):
 
 def index(request):
     if request.user.is_authenticated:
-        return busqueda(request)
+        if request.user.is_superuser:
+            return HttpResponseNotFound('<h1>Page not found</h1>')
+        else:
+            return busqueda(request)
     else:
         return auth_views.login(request)
