@@ -1,10 +1,22 @@
 from django.shortcuts import render
 from .models import Articulos
 from userprofile.models import Perfil
+from django.core.files.storage import FileSystemStorage
 # Create your views here.
 
 
 def id_articulo(request, id_articulo):
+    print(request.POST)
+    if 'guardar' in request.POST:
+
+        articulo = Articulos.objects.get(pk=request.POST.get("ident",""))
+        articulo.nombre_articulo = request.POST.get("new_name","")
+        articulo.descripcion_articulo = request.POST.get("new_descr","")
+
+        #myfile = request.FILES('new_foto')
+        #fs = FileSystemStorage()
+        #fs.save(articulo.foto_articulo.path,myfile)
+        articulo.save()
     perfil = Perfil.objects.get(correo=request.user.id)
     articulo = Articulos.objects.get(pk=id_articulo)
     nombre = articulo.nombre_articulo

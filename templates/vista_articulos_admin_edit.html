@@ -82,8 +82,8 @@
         max-height:40%;
         vertical-align: middle;
 }
-    .descripcion {
-        border: dashed 1px black;
+    #descripcion {
+        width:100%;
     }
 
     .caja_reserva {
@@ -104,10 +104,10 @@
 {% extends "TopBar.html" %}
 {% block content %}
     <main class="container">
-        <form>
         <!-- Left Column -->
+        <form action="/articulos/{{ id }}/" method="post">{% csrf_token %}
         <div class="left-column">
-            <h1><input type="text" value="{{ nombre }}">&nbsp <span class="{{ estado }}"> &nbsp {{ estado }} &nbsp</span></h1>
+            <h1><input type="text" value="{{ nombre }}" name="new_name">&nbsp <span class="{{ estado }}"> &nbsp {{ estado }} &nbsp</span></h1>
             <br/>
             <br/>
             <!-- Foto -->
@@ -115,20 +115,19 @@
             <br/>
             Esta foto remplazará la foto actual.
             <br/>
-            <input type="file">
+            <input type="file" name="new_foto">
             <br/>
             <br/>
-            <input type="text" value="{{ descripcion }}">
+            <input id="descripcion" type="text" value="{{ descripcion }}" name="new_descr"></p>
         </div>
-        </form>
 
   <!-- Right Column -->
   <div class="right-column">
       <div class="caja_reserva">
-          <form action="/articulos/{{ id }}/" method="post">{% csrf_token %}
               <p align="left">
               <input type="submit" value="Guardar" name="guardar">
               </p>
+              <input type="hidden" name="ident" value={{ id }}>
           </form>
       </div>
       <h2>Historial Reservas</h2>
