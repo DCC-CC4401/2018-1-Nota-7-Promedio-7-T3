@@ -22,6 +22,7 @@ from django.contrib.staticfiles.urls import static
 from django.conf import settings
 from userprofile import views as userprofileviews
 from espacios.views import espaciosView
+from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),

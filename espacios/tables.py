@@ -27,7 +27,10 @@ class EspaciosTable(tables.Table):
         attrs = {'class': 'paleblue'}
 
     '''
-
+    class Meta:
+        model = Espacios
+        template_name = 'django_tables2/bootstrap.html'
+    '''
     Estado = tables.Column()
     Nombre = tables.Column()
     Descripción = tables.Column()
@@ -36,3 +39,5 @@ class EspaciosTable(tables.Table):
 
     class Meta:
         attrs = {'class': 'table'}
+        
+    '''
