@@ -105,7 +105,7 @@
 {% block content %}
     <main class="container">
         <!-- Left Column -->
-        <form action="/articulos/{{ id }}/" method="post">{% csrf_token %}
+        <form action="/articulos/{{ id }}/" method="post" enctype="multipart/form-data">{% csrf_token %}
         <div class="left-column">
             <h1><input type="text" value="{{ nombre }}" name="new_name">&nbsp <span class="{{ estado }}"> &nbsp {{ estado }} &nbsp</span></h1>
             <br/>

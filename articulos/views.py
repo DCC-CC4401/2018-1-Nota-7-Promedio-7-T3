@@ -1,22 +1,34 @@
 from django.shortcuts import render
 from .models import Articulos
 from userprofile.models import Perfil
+from reservas.models import ReservaArticulo
 from django.core.files.storage import FileSystemStorage
-# Create your views here.
-
+from datetime import datetime
+from django.utils import timezone
+from django.conf import settings
 
 def id_articulo(request, id_articulo):
-    print(request.POST)
-    if 'guardar' in request.POST:
-
+    if ('guardar' in request.POST) & request.user.is_superuser:
         articulo = Articulos.objects.get(pk=request.POST.get("ident",""))
         articulo.nombre_articulo = request.POST.get("new_name","")
         articulo.descripcion_articulo = request.POST.get("new_descr","")
-
-        #myfile = request.FILES('new_foto')
-        #fs = FileSystemStorage()
-        #fs.save(articulo.foto_articulo.path,myfile)
+        old_path = articulo.foto_articulo
+        myfile = request.FILES['new_foto']
+        fs = FileSystemStorage()
+        new_path = settings.MEDIA_ROOT + "/uploads/fotos_articulos/"+articulo.nombre_articulo
+        articulo.foto_articulo = fs.save(new_path,myfile)
+        fs.delete(old_path)
         articulo.save()
+    elif 'pedir' in request.POST:
+        str_inicial = request.POST.get("finicio","")+" "+request.POST.get("hinicio","")
+        str_final = request.POST.get("ffin","")+" "+request.POST.get("hfin","")
+        dtinicio = datetime.strptime(str_inicial, '%Y-%m-%d %H:%M')
+        dtfin = datetime.strptime(str_final, '%Y-%m-%d %H:%M')
+        dtinicio = timezone.make_aware(dtinicio, timezone.get_current_timezone())
+        dtfin = timezone.make_aware(dtfin, timezone.get_current_timezone())
+        articulo = Articulos.objects.get(pk=request.POST.get("ident", ""))
+        query = ReservaArticulo(articulo=articulo,inicio=dtinicio,final=dtfin)
+        query.save()
     perfil = Perfil.objects.get(correo=request.user.id)
     articulo = Articulos.objects.get(pk=id_articulo)
     nombre = articulo.nombre_articulo
