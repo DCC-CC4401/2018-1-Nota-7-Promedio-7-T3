@@ -3,8 +3,6 @@ from articulos.models import Articulos
 
 
 def busqueda(request):
-
-
     nombre = ""
     resultados = Articulos.objects.all()
 
@@ -19,3 +17,7 @@ def busqueda(request):
 
     context = {'resultados' : resultados, 'nombre' : nombre}
     return render(request, 'busqueda_articulos.html', context)
+
+
+def espacios(request):
+    return render(request, 'busqueda_espacios.html')

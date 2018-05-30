@@ -26,6 +26,7 @@ from espacios import views as espaciosviews
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/busqueda/', user_views.busqueda, name='nombre_articulo'),
+    path('user/espacios', user_views.espacios),
     path('articulos/<int:id_articulo>/', views.id_articulo, name='id_articulo'),
     path('articulos/<int:id_articulo>/edit', views.id_articulo, name='id_articulo'),
     path('login/', auth_views.login, name='login'),

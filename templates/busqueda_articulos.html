@@ -1,35 +1,104 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Búsqueda de artículos</title>
+
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <title>Busqueda de artículos</title>
 </head>
 
 {% extends "TopBar.html" %}
+
 {% block content %}
 
-<h1>Búsqueda de artículos</h1>
+    <body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+            integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+            crossorigin="anonymous"></script>
 
-<form method="GET" action="">
-    <input type="text" name="nombre" value="{{ nombre }}" placeholder="Buscar articulos"/> <br>
-    <select name="estado">
-        <option value="0">Seleccione un estado</option>
-        <option value="1">Disponible</option>
-        <option value="2">Prestado</option>
-        <option value="3">En reparación</option>
-        <option value="4">Perdido</option>
+    <div class="container">
 
-    </select> <br>
-    <input type="submit" value="Buscar"/>
-</form>
+        <div class="row" style="height:20px;"></div>
 
-<ul>
-{%for articulo in resultados %}
+        <div class="row">
+            <div class="column ml-auto">
+                <a type="button" class="btn btn-success" role="button">Artículos</a>
+            </div>
+            <div class="column mr-auto">
+                <a type="button" href="/user/espacios" class="btn" role="button">Espacios</a>
+            </div>
+        </div>
+    </div>
 
-    <a href="/articulos/{{ articulo.id }}">{{ articulo.nombre_articulo }}</a> <br>
+    <div class="row" style="height:20px;"></div>
 
-{% endfor %}
-</ul>
+    <div class="container">
+        <form method="GET" action="">
+
+
+            <div class="row no-gutters">
+                <div class="col-10">
+                    <input type="text" name="nombre" value="{{ nombre }}" placeholder="Buscar articulos"
+                           class="form-control"/>
+                </div>
+                <div class="col-2">
+                    <input type="submit" value="Buscar" class="form-control"/>
+                </div>
+            </div>
+
+
+            <select name="estado" class="form-control">
+                <option value="0">Disponibilidad</option>
+                <option value="1">Disponible</option>
+                <option value="2">Prestado</option>
+                <option value="3">En reparación</option>
+                <option value="4">Perdido</option>
+
+            </select> <br>
+
+        </form>
+
+    </div>
+
+    <div class="container">
+        <div class="row">
+            {% for articulo in resultados %}
+                <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <a href="/articulos/{{ articulo.id_articulo }} " class="badge"> <img
+                                        class='img-thumbnail img-fluid'
+                                        src={{ articulo.foto_articulo.url }}/>
+                                </a>
+                            </div>
+                            <div class="col-12">
+                                <a href="/articulos/{{ articulo.id_articulo }}"
+                                   class="badge"> {{ articulo.nombre_articulo }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+    </div>
+
+
+    </body>
 {% endblock %}
-
 </html>
