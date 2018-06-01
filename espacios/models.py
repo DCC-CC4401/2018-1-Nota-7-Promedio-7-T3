@@ -7,7 +7,6 @@ class Espacios(models.Model):
     estado_espacio = models.IntegerField(choices=ESTADOS_ESP,default=1)
     nombre_espacio = models.CharField(max_length=200)
     descripcion_espacio = models.CharField(max_length=1500,default="")
-    id_espacio = models.IntegerField(default=0)
     capacidad_espacio = models.IntegerField(default=0)
     foto_espacio = models.ImageField(upload_to='uploads/fotos_espacios', default="")
 
