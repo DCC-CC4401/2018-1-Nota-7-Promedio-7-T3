@@ -52,23 +52,31 @@
 
             <div class="row no-gutters">
                 <div class="col-10">
-                    <input type="text" name="nombre" value="{{ nombre }}" placeholder="Buscar articulos"
+                    <input type="text" name="nombre" value="{{ nombre }}" placeholder="Nombre artículo"
                            class="form-control"/>
                 </div>
                 <div class="col-2">
                     <input type="submit" value="Buscar" class="form-control"/>
                 </div>
+
+
+                <div class="col-12">
+                    <select name="estado" class="form-control">
+                        <option value="0">Disponibilidad</option>
+                        <option value="1">Disponible</option>
+                        <option value="2">Prestado</option>
+                        <option value="3">En reparación</option>
+                        <option value="4">Perdido</option>
+                    </select>
+                </div>
+
+                <div class="col-12">
+                    <input type="datetime-local" class="form-control"/>
+
+                </div>
+
+
             </div>
-
-
-            <select name="estado" class="form-control">
-                <option value="0">Disponibilidad</option>
-                <option value="1">Disponible</option>
-                <option value="2">Prestado</option>
-                <option value="3">En reparación</option>
-                <option value="4">Perdido</option>
-
-            </select> <br>
 
         </form>
 
