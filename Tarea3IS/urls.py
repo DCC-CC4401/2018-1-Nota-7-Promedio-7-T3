@@ -21,11 +21,13 @@ from django.contrib.auth import views as auth_views
 from django.contrib.staticfiles.urls import static
 from django.conf import settings
 from userprofile import views as userprofileviews
-from espacios import views as espaciosviews
+from espacios.views import espaciosView
+from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/busqueda/', user_views.busqueda, name='nombre_articulo'),
+    path('user/espacios', user_views.espacios),
     path('articulos/<int:id_articulo>/', views.id_articulo, name='id_articulo'),
     path('articulos/<int:id_articulo>/edit', views.editar, name='id_articulo'),
     path('login/', auth_views.login, name='login'),
@@ -35,6 +37,10 @@ urlpatterns = [
     path('home/', userprofileviews.index, name = 'home'),
     path('', userprofileviews.redirectToHome),
     #path('espacios/', espaciosviews.EspaciosView.espaciosV()),
+    url(r'^espacios/', espaciosView),
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
