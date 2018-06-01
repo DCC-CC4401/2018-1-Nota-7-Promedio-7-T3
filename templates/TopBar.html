@@ -47,6 +47,13 @@ li a:hover {
   <li><a><img id="Mail" src="/media/cosas/mailIcon.png" onclick="" alt="Mountain View" width="50" height="50"></a></li>
   <li><a href=""> {{ perfil.nombre }} </a></li>
   <li><a href="#foto">Foto</a></li>
+
+      {% if user.is_authenticated %}
+  <p><a href="{% url 'logout' %}">logout</a></p>
+{% else %}
+  <p>You are not logged in</p>
+{% endif %}
+
   </div>
 </ul>
 
