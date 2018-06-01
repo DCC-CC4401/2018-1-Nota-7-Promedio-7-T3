@@ -21,7 +21,8 @@ from django.contrib.auth import views as auth_views
 from django.contrib.staticfiles.urls import static
 from django.conf import settings
 from userprofile import views as userprofileviews
-from espacios import views as espaciosviews
+from espacios.views import espaciosView
+from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,6 +37,10 @@ urlpatterns = [
     path('home/', userprofileviews.index, name = 'home'),
     path('', userprofileviews.redirectToHome),
     #path('espacios/', espaciosviews.EspaciosView.espaciosV()),
+    url(r'^espacios/', espaciosView),
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
