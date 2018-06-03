@@ -45,16 +45,16 @@
         <div class="row">
             <!-- Left Column -->
             <div class="col-8">
-                <h1><span class="pull-left">{{ nombre }}</span> &nbsp <span class="{{ estado }}"> &nbsp {{ estado }} &nbsp</span></h1>
+                <h1><span class="pull-left">{{ articulo.nombre_articulo }}</span> &nbsp <span class="{{ estado }}"> &nbsp {{ estado }} &nbsp</span></h1>
                 <br/>
                 <br/>
                 <!-- Foto -->
-                <img style="margin-left: 20px; max-height: 300px;max-width: 500px;" class="img-fluid" src={{ foto.url }}/>
+                <img style="margin-left: 20px; max-height: 300px;max-width: 500px;" class="img-fluid" src={{ articulo.foto_articulo.url }}/>
                 <br/>
                 <br/>
                 <div class="card">
                     <div class="card-body">
-                        {{ descripcion }}
+                        {{ articulo.descripcion_articulo }}
                     </div>
                 </div>
             </div>

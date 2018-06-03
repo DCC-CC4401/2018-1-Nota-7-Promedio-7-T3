@@ -42,19 +42,19 @@
 {% extends "TopBar.html" %}
 {% block content %}
     <div class="container">
-        <form action="/articulos/{{ id }}/" method="post" enctype="multipart/form-data">{% csrf_token %}
+        <form action="/articulos/{{ articulo.id }}/" method="post" enctype="multipart/form-data">{% csrf_token %}
         <div class="row">
             <!-- Left Column -->
             <div class="col-8">
                 <h1>
                     <div class="form-group">
-                    <input type="text" value="{{ nombre }}" name="new_name" class="form-control form-control-lg">
+                    <input type="text" value="{{ articulo.nombre_articulo }}" name="new_name" class="form-control form-control-lg">
                     </div>
                 </h1>
                 <br/>
                 <br/>
                 <!-- Foto -->
-                <img style="margin-left: 20px; max-height: 300px;max-width: 500px;" class="img-fluid" src={{ foto.url }}/>
+                <img style="margin-left: 20px; max-height: 300px;max-width: 500px;" class="img-fluid" src={{ articulo.foto_articulo.url }}/>
                 <br/>
                 <br/>
                 <div class="form-group">
@@ -64,7 +64,7 @@
                 <br/>
                 <br/>
                 <div class="form-group">
-                    <input type="text" value="{{ descripcion }}" name="new_descr" class="form-control">
+                    <input type="text" value="{{ articulo.descripcion_articulo }}" name="new_descr" class="form-control">
                 </div>
             </div>
 
@@ -72,7 +72,7 @@
             <div class="col-4">
                 <div class="col-1 ml-auto">
                     <button type="submit" class="btn btn-primary" name="guardar">Guardar</button>
-                     <input type="hidden" name="ident" value={{ id }}>
+                     <input type="hidden" name="ident" value={{ articulo.id }}>
                 </div>
                 <br/>
                 <br/>
