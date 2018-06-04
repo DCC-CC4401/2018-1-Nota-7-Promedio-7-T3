@@ -3,7 +3,7 @@ from .models import Articulos
 from userprofile.models import Perfil
 from reservas.models import ReservaArticulo
 from django.core.files.storage import FileSystemStorage
-from datetime import datetime
+from datetime import datetime,timedelta
 from django.utils import timezone
 from django.conf import settings
 
@@ -28,11 +28,16 @@ def id_articulo(request, id_articulo):
             dtfin = datetime.strptime(request.POST.get("ffin",""), '%Y-%m-%dT%H:%M')
             dtinicio = timezone.make_aware(dtinicio, timezone.get_current_timezone())
             dtfin = timezone.make_aware(dtfin, timezone.get_current_timezone())
-            articulo = Articulos.objects.get(id=request.POST.get("ident", ""))
-            query = ReservaArticulo(perfil=perfil, articulo=articulo, inicio=dtinicio, final=dtfin)
-            query.save()
-            #Retornar una respuesta
+            if dtfin <= dtinicio:
+                print("La fecha final debe ser distinta de la fecha inicial")
+            elif dtinicio < timezone.make_aware(datetime.today() + timedelta(hours=1),timezone.get_current_timezone()):
+                print("Al menos en una hora mas")
+            else:
+                articulo = Articulos.objects.get(id=request.POST.get("ident", ""))
+                query = ReservaArticulo(perfil=perfil, articulo=articulo, inicio=dtinicio, final=dtfin)
+                query.save()
     reservas = ReservaArticulo.objects.filter(articulo=articulo, final__lt=timezone.make_aware(datetime.today(),timezone.get_current_timezone()))
+    #sorted(reservas,key=lambda reserva : ReservaArticulo.final)
     lista_reservas=list(reservas)
     estado = articulo.ESTADOS_ART[articulo.estado_articulo - 1][1]
     context = {'articulo': articulo, 'perfil': perfil, 'lista_reservas': lista_reservas, 'estado': estado}
