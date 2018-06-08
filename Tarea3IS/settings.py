@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'articulos.apps.ArticulosConfig',
     'userprofile.apps.UserprofileConfig',
     'reservas.apps.ReservasConfig',
+    'bootstrap4',
     'django_tables2',
+    'bootstrap_datepicker_plus',
 ]
 
 MIDDLEWARE = [
@@ -105,6 +107,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+BOOTSTRAP4 = {
+    'include_jquery': True,
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/

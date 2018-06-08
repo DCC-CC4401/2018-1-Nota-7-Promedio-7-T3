@@ -41,32 +41,34 @@ li a:hover {
 </head>
 <header>
 
-<ul>
-  <li><img id="LogoCEI" src="/media/cosas/logoCEI2014.png" onclick="" alt="Mountain View" width="70" height="70"><br></li>
-  <div class="right">
-  <li><a><img id="Mail" src="/media/cosas/mailIcon.png" onclick="" alt="Mountain View" width="50" height="50"></a></li>
-  <li><a href=""> {{ perfil.nombre }} </a></li>
-  <li><a href="#foto">Foto</a></li>
+    <ul>
+        <li><img id="LogoCEI" src="/media/cosas/logoCEI2014.png" onclick="" alt="Mountain View" width="70" height="70"><br></li>
+        <div class="right">
+            <li><a><img id="Mail" src="/media/cosas/mailIcon.png" onclick="" alt="Mountain View" width="50" height="50"></a></li>
+            <li><a href=""> {{ perfil.nombre }} </a></li>
+            <li><a href="#foto">Foto</a></li>
 
-      {% if user.is_authenticated %}
-  <p><a href="{% url 'logout' %}">logout</a></p>
-{% else %}
-  <p>You are not logged in</p>
-{% endif %}
+            {% if user.is_authenticated %}
+                <p><a href="{% url 'logout' %}">logout</a></p>
+            {% else %}
+                <p>You are not logged in</p>
+            {% endif %}
 
-  </div>
-</ul>
+        </div>
+    </ul>
 
 </header>
 <body>
 <br/>
-    {% block content %}
-    {% endblock %}
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-  </body>
+{% block content %}
+{% endblock %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+
+{% block extrahead %}       {# Extra Resources Start #}
+    {{ form.media }}            {# Form required JS and CSS #}
+{% endblock %}              {# Extra Resources End #}
+</body>
 </html>
 
