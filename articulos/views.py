@@ -30,7 +30,7 @@ def id_articulo(request, id_articulo):
                     fs.delete(old_path)
                 articulo.save()
         context = {'articulo': articulo, 'perfil': perfil, 'lista_reservas': lista_reservas, 'estado': estado}
-        return render(request, 'vista_articulos_admin.html', context)
+        return render(request, 'articulos/vista_articulos_admin.html', context)
     else:
         if request.method == 'POST':
             if 'pedir' in request.POST:
@@ -44,7 +44,7 @@ def id_articulo(request, id_articulo):
         else:
             form = ReservaForm()
         context = {'articulo': articulo, 'perfil': perfil, 'lista_reservas': lista_reservas, 'estado': estado, 'form': form}
-        return render(request, 'vista_articulos_usuarios.html', context)
+        return render(request, 'articulos/vista_articulos_usuarios.html', context)
 
 
 
@@ -56,4 +56,4 @@ def editar(request, id_articulo):
     reservas = ReservaArticulo.objects.filter(articulo=articulo, final__lt=timezone.make_aware(datetime.today(), timezone.get_current_timezone()))
     lista_reservas = list(reservas)
     context = {'articulo': articulo, 'estado': estado, 'perfil': perfil, 'lista_reservas': lista_reservas}
-    return render(request, 'vista_articulos_admin_edit.html', context)
+    return render(request, 'articulos/vista_articulos_admin_edit.html', context)

@@ -45,4 +45,4 @@ def index(request):
         return auth_views.login(request)
 
 def redirectToHome(request):
-    return redirect('home')
+    return redirect('/home/')
