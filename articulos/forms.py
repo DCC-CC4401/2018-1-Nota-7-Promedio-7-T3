@@ -12,6 +12,8 @@ class ReservaForm(forms.Form):
                     "showClear": True,
                     "showTodayButton": False,
                     "minDate": (datetime.now()+timedelta(hours=1)).strftime("%m/%d/%Y %H:%M"),
+                    "sideBySide": True,
+                    "daysOfWeekDisabled": [0,6],
                 })
     )
     fin = forms.DateTimeField(
@@ -23,6 +25,8 @@ class ReservaForm(forms.Form):
                 "showClear": True,
                 "showTodayButton": False,
                 "minDate": (datetime.now()+timedelta(hours=1)).strftime("%m/%d/%Y %H:%M"),
+                "sideBySide": True,
+                "daysOfWeekDisabled": [0, 6],
             }
         )
     )
@@ -36,4 +40,12 @@ class ReservaForm(forms.Form):
             if fin <= inicio:
                 raise forms.ValidationError(
                     "La fecha final debe ser posterior a la inicial."
+                )
+            if inicio.hour < 9 or inicio.hour > 17:
+                raise forms.ValidationError(
+                    "La hora de inicio debe estar entre las 9:00 y 18:00."
+                )
+            if fin.hour < 9 or (fin.hour == 18 and fin.minute > 0) or fin.hour > 18:
+                raise forms.ValidationError(
+                    "La hora de fin debe estar entre las 9:00 y 18:00."
                 )
