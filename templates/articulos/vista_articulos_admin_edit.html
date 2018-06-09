@@ -36,7 +36,7 @@
         float:right;
     }
     /*-------------------*/
-
+    .bodycontainer {max-height: 490px;width: 100%; margin: 0; overflow-y: auto; }
 </style>
 </head>
 {% extends "TopBar.html" %}
@@ -45,7 +45,7 @@
         <form action="/articulos/{{ articulo.id }}/" method="post" enctype="multipart/form-data">{% csrf_token %}
         <div class="row">
             <!-- Left Column -->
-            <div class="col-8">
+            <div class="col-8" style="max-height:700px;height:700px;">
                 <h1>
                     <div class="form-group">
                     <input type="text" value="{{ articulo.nombre_articulo }}" name="new_name" class="form-control form-control-lg">
@@ -69,10 +69,10 @@
             </div>
 
             <!-- Right Column -->
-            <div class="col-4">
-                <div class="col-1 ml-auto">
+            <div class="col-4" style="max-height:700px;height:700px;">
+                <div class="col-4 ml-auto">
                     <button type="submit" class="btn btn-primary" name="guardar">Guardar</button>
-                     <input type="hidden" name="ident" value={{ articulo.id }}>
+                    <input type="hidden" name="ident" value={{ articulo.id }}>
                 </div>
                 <br/>
                 <br/>
@@ -84,15 +84,19 @@
                         <th scope="col">Fin</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    {% for reserva in lista_reservas %}
-                        <tr>
-                            <td>{{ reserva.inicio }}</td>
-                    <td>{{ reserva.final }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
                 </table>
+                <div class="bodycontainer scrollable">
+                    <table class="table table-hover table-striped table-condensed">
+                        <tbody>
+                        {% for reserva in lista_reservas %}
+                            <tr>
+                                <td>{{ reserva.inicio }}</td>
+                                <td>{{ reserva.final }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         </form>

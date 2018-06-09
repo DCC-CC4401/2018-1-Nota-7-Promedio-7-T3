@@ -12,9 +12,10 @@ from django.http import HttpResponseRedirect
 def id_articulo(request, id_articulo):
     perfil = Perfil.objects.get(correo=request.user.id)
     articulo = Articulos.objects.get(pk=id_articulo)
-    reservas = ReservaArticulo.objects.filter(articulo=articulo, final__lt=timezone.make_aware(datetime.today(), timezone.get_current_timezone()))
-    #sorted(reservas,key=lambda reserva : ReservaArticulo.final)
+    reservas = ReservaArticulo.objects.filter(articulo=articulo, final__lt=timezone.make_aware(datetime.now(), timezone.get_current_timezone()))
     lista_reservas=list(reservas)
+    lista_reservas.sort(key=lambda x: x.final, reverse=True)
+    lista_reservas = lista_reservas[:10]
     estado = articulo.ESTADOS_ART[articulo.estado_articulo - 1][1]
     if request.user.is_superuser:
         if request.method == 'POST':
@@ -38,7 +39,7 @@ def id_articulo(request, id_articulo):
                 if form.is_valid():
                     query = ReservaArticulo(perfil=perfil, articulo=articulo, inicio=form.cleaned_data['inicio'], final=form.cleaned_data['fin'])
                     query.save()
-                    return HttpResponseRedirect('/home/')
+                    return HttpResponseRedirect('/exito/')
 
 
         else:
@@ -54,6 +55,11 @@ def editar(request, id_articulo):
     articulo = Articulos.objects.get(pk=id_articulo)
     estado = articulo.ESTADOS_ART[articulo.estado_articulo - 1][1]
     reservas = ReservaArticulo.objects.filter(articulo=articulo, final__lt=timezone.make_aware(datetime.today(), timezone.get_current_timezone()))
-    lista_reservas = list(reservas)
+    lista_reservas=list(reservas)
+    lista_reservas.sort(key=lambda x: x.final, reverse=True)
+    lista_reservas = lista_reservas[:10]
     context = {'articulo': articulo, 'estado': estado, 'perfil': perfil, 'lista_reservas': lista_reservas}
     return render(request, 'articulos/vista_articulos_admin_edit.html', context)
+
+def exito(request):
+    return render(request, 'exito.html')
