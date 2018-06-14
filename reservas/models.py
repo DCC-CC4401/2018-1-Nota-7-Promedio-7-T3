@@ -11,6 +11,9 @@ class ReservaArticulo(models.Model):
     ESTADOS_RES = ((1, 'Pendiente'), (2, 'Entregado'), (3, 'Rechazado'))
     estado_reserva = models.IntegerField(choices=ESTADOS_RES, default=1)
 
+    def __lt__(self, other):
+        return self.final < other.final
+
 class ReservaEspacio(models.Model):
     espacio = models.ForeignKey(Espacios, on_delete=models.CASCADE)
     perfil = models.ForeignKey(Perfil, on_delete=models.CASCADE)

@@ -26,10 +26,7 @@ def signup(request):
             user.perfil.nombre = form.cleaned_data.get('nombre')
             user.perfil.rut = form.cleaned_data.get('rut')
             user.save()
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=user.username, password=raw_password)
-            login(request, user)
-            return redirect('login')
+            return redirect('/exito/')
     else:
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
@@ -45,4 +42,4 @@ def index(request):
         return auth_views.login(request)
 
 def redirectToHome(request):
-    return redirect('home')
+    return redirect('/home/')
