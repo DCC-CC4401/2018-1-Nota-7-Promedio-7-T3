@@ -30,6 +30,7 @@ urlpatterns = [
     path('user/espacios', user_views.espacios),
     path('articulos/<int:id_articulo>/', views.id_articulo, name='id_articulo'),
     path('articulos/<int:id_articulo>/edit', views.editar, name='id_articulo'),
+    path('exito/', views.exito),
     path('login/', auth_views.login, name='login'),
     path('logout/', auth_views.logout, name='logout'),
     path('perfil/', userprofileviews.perfilUsuario, name = 'perfilUsuario'),
