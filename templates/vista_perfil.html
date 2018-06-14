@@ -90,35 +90,49 @@
       <th scope="col">Fecha</th>
       <th scope="col">Nombre</th>
       <th scope="col">Detalle</th>
-      <th scope="col">Handle</th>
+        <th scope="col">Eliminar</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+
+  {% for reserva in reservas %}
+      <tr>
+      <th scope="row"> {{ reserva.inicio }} </th>
+      <td>{{ reserva.articulo.nombre_articulo }}</td>
+      <td>{{ reserva.articulo.descripcion_articulo }}</td>
+          <td>   <form action="" method="post">{% csrf_token %}<input type="submit" value="Borrar" name="borrar">
+       <input type="hidden" name="id" value={{ reserva.id }}></form>  </td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
+
+  {% endfor %}
+
   </tbody>
 </table>
 </div>
 
 <div id="Prestamos" class="tabcontent">
-  <h3>Prestamos</h3>
-  <p>Estos son tus ultimos prestamos</p>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Fecha</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Detalle</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  {% for prestamo in prestamos %}
+      <tr>
+      <th scope="row"> {{ prestamo.reserva.inicio }} </th>
+      <td>{{ prestamo.reserva.articulo.nombre_articulo }}</td>
+      <td>{{ prestamo.reserva.articulo.descripcion_articulo }}</td>
+    </tr>
+
+  {% endfor %}
+
+  </tbody>
+</table>
+
 </div>
 
 
