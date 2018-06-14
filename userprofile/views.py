@@ -9,12 +9,24 @@ from userprofile.models import Perfil
 from userlanding.views import busqueda
 from django.contrib.auth import views as auth_views
 from django.http import HttpResponse, HttpResponseNotFound
+from reservas.models import ReservaArticulo
+from prestamos.models import PrestamoArticulo
 
 # Create your views here.
 
 def perfilUsuario(request):
+
+    if request.method == 'POST':
+        if 'borrar' in request.POST:
+            ReservaArticulo.objects.filter(pk=request.POST.get("id", "")).delete()
+
+
     perfil = Perfil.objects.get(correo=request.user.id)
-    context ={'perfil': perfil}
+    reservas = ReservaArticulo.objects.filter(perfil__correo=perfil.correo).order_by('inicio')
+    lista_reservas = list(reservas)
+    prestamos = PrestamoArticulo.objects.filter(reserva__perfil__correo=perfil.correo).order_by('reserva__inicio')
+    lista_prestamos = list(prestamos)
+    context ={'perfil': perfil, 'reservas': lista_reservas, 'prestamos':lista_prestamos}
     return render(request, 'vista_perfil.html', context)
 
 def signup(request):
@@ -43,6 +55,7 @@ def index(request):
             return busqueda(request)
     else:
         return auth_views.login(request)
+
 
 def redirectToHome(request):
     return redirect('home')

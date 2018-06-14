@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'userprofile.apps.UserprofileConfig',
     'reservas.apps.ReservasConfig',
     'django_tables2',
+    'prestamos.apps.PrestamosConfig'
 ]
 
 MIDDLEWARE = [
