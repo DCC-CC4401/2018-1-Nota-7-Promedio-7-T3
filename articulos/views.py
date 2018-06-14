@@ -9,6 +9,7 @@ from django.conf import settings
 from .forms import ReservaForm
 from django.http import HttpResponseRedirect
 
+
 def id_articulo(request, id_articulo):
     perfil = Perfil.objects.get(correo=request.user.id)
     articulo = Articulos.objects.get(pk=id_articulo)
@@ -40,14 +41,10 @@ def id_articulo(request, id_articulo):
                     query = ReservaArticulo(perfil=perfil, articulo=articulo, inicio=form.cleaned_data['inicio'], final=form.cleaned_data['fin'])
                     query.save()
                     return HttpResponseRedirect('/exito/')
-
-
         else:
             form = ReservaForm()
         context = {'articulo': articulo, 'perfil': perfil, 'lista_reservas': lista_reservas, 'estado': estado, 'form': form}
         return render(request, 'articulos/vista_articulos_usuarios.html', context)
-
-
 
 
 def editar(request, id_articulo):
@@ -60,6 +57,7 @@ def editar(request, id_articulo):
     lista_reservas = lista_reservas[:10]
     context = {'articulo': articulo, 'estado': estado, 'perfil': perfil, 'lista_reservas': lista_reservas}
     return render(request, 'articulos/vista_articulos_admin_edit.html', context)
+
 
 def exito(request):
     return render(request, 'exito.html')
