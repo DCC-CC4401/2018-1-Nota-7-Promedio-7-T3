@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'bootstrap4',
     'django_tables2',
     'bootstrap_datepicker_plus',
-    'widget_tweaks',
     'prestamos.apps.PrestamosConfig'
 ]
 
