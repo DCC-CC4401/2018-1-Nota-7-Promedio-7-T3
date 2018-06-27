@@ -33,4 +33,4 @@ def busqueda(request):
 
 
 def espacios(request):
-    return render(request, 'busqueda_espacios.html')
+    return render(request, 'busqueda_espacios/busqueda_espacios.html')
