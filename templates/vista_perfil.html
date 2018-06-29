@@ -69,6 +69,8 @@
 
 <body>
 
+<div class="container">
+
 {% if perfil.habilitado %}
 <h1> Estado de Usuario: Habilitado </h1>
 {% else %}
@@ -76,11 +78,14 @@
 {% endif %}
 
 
+
 <!-- Tab links -->
 <div class="tab">
   <button class="tablinks" onclick="openCity(event, 'Reservas')">Reservas</button>
   <button class="tablinks" onclick="openCity(event, 'Prestamos')">Prestamos</button>
 </div>
+
+
 
 <!-- Tab content -->
 <div id="Reservas" class="tabcontent">
@@ -98,8 +103,13 @@
   {% for reserva in reservas %}
       <tr>
       <th scope="row"> {{ reserva.inicio }} </th>
-      <td>{{ reserva.articulo.nombre_articulo }}</td>
-      <td>{{ reserva.articulo.descripcion_articulo }}</td>
+          {% if reserva.get_cname == 'ReservaArticulo' %}
+          <td>{{ reserva.articulo.nombre_articulo }}</td>
+          <td>{{ reserva.articulo.descripcion_articulo }}</td>
+          {% else %}
+          <td>{{ reserva.espacio.nombre_espacio }}</td>
+          <td>{{ reserva.espacio.descripcion_espacio }}</td>
+          {% endif %}
           <td>   <form action="" method="post">{% csrf_token %}<input type="submit" value="Borrar" name="borrar">
        <input type="hidden" name="id" value={{ reserva.id }}></form>  </td>
     </tr>
@@ -109,6 +119,7 @@
   </tbody>
 </table>
 </div>
+
 
 <div id="Prestamos" class="tabcontent">
     <table class="table">
@@ -124,14 +135,21 @@
   {% for prestamo in prestamos %}
       <tr>
       <th scope="row"> {{ prestamo.reserva.inicio }} </th>
-      <td>{{ prestamo.reserva.articulo.nombre_articulo }}</td>
-      <td>{{ prestamo.reserva.articulo.descripcion_articulo }}</td>
+          {% if prestamo.reserva.get_cname == 'ReservaArticulo' %}
+          <td>{{ prestamo.reserva.articulo.nombre_articulo }}</td>
+          <td>{{ prestamo.reserva.articulo.descripcion_articulo }}</td>
+          {% else %}
+          <td>{{ prestamo.reserva.espacio.nombre_espacio }}</td>
+          <td>{{ prestamo.reserva.espacio.descripcion_espacio }}</td>
+          {% endif %}
     </tr>
 
   {% endfor %}
 
   </tbody>
 </table>
+
+</div>
 
 </div>
 

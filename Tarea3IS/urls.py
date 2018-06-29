@@ -39,6 +39,7 @@ urlpatterns = [
     path('', userprofileviews.redirectToHome),
     #path('espacios/', espaciosviews.EspaciosView.espaciosV()),
     url(r'^espacios/', espaciosView),
+    path('change_password/', userprofileviews.change_password, name='change_password'),
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
