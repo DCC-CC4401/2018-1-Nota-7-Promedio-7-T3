@@ -16,7 +16,7 @@ def reservas(request):
     lista_reservas = list(reservas_articulos)+list(reservas_espacios)
     lista_prestamos = list(prestamos_articulos)+list(prestamos_espacios)
     lista_reservas.sort(key=lambda x: x.inicio)
-    lista_prestamos.sort(key=lambda x: x.reserva.inicio, reverse=True)
+    lista_prestamos.sort(key=lambda x: x.reserva.inicio)
     if request.method == 'POST':
         if 'todos' in request.POST:
             prestamos_articulos = PrestamoArticulo.objects.all()
