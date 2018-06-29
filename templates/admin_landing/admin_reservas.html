@@ -56,7 +56,11 @@
                                     <input type="checkbox" value="{{ reserva.id }}" name="checks[]">
                                 </div></td>
                                 <td>{{ reserva.id }}</td>
+                                {% if reserva.get_cname == 'ReservaArticulo' %}
                                 <td>{{ reserva.articulo.nombre_articulo }}</td>
+                                {% else %}
+                                <td>{{ reserva.espacio.nombre_espacio }}</td>
+                                {% endif %}
                                 <td>{{ reserva.perfil.nombre }}</td>
                                 <td>{{ reserva.inicio }}</td>
                                 <td>{{ reserva.final }}</td>
