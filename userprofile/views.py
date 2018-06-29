@@ -1,21 +1,14 @@
-from django.shortcuts import render
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from userprofile.forms import SignUpForm
 from userprofile.models import Perfil
 from userlanding.views import busqueda
+from adminlanding.views import reservas
 from django.contrib.auth import views as auth_views
-from django.http import HttpResponse, HttpResponseNotFound
 from reservas.models import ReservaArticulo
 from prestamos.models import PrestamoArticulo
 
-# Create your views here.
 
 def perfilUsuario(request):
-
     if request.method == 'POST':
         if 'borrar' in request.POST:
             ReservaArticulo.objects.filter(pk=request.POST.get("id", "")).delete()
@@ -28,6 +21,7 @@ def perfilUsuario(request):
     lista_prestamos = list(prestamos)
     context ={'perfil': perfil, 'reservas': lista_reservas, 'prestamos':lista_prestamos}
     return render(request, 'vista_perfil.html', context)
+
 
 def signup(request):
     if request.method == 'POST':
@@ -47,7 +41,7 @@ def signup(request):
 def index(request):
     if request.user.is_authenticated:
         if request.user.is_superuser:
-            return HttpResponseNotFound('<h1>Page not found</h1>')
+            return reservas(request)
         else:
             return busqueda(request)
     else:

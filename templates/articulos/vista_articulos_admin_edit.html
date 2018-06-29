@@ -45,7 +45,7 @@
         <form action="/articulos/{{ articulo.id }}/" method="post" enctype="multipart/form-data">{% csrf_token %}
         <div class="row">
             <!-- Left Column -->
-            <div class="col-8" style="max-height:700px;height:700px;">
+            <div class="col-8">
                 <h1>
                     <div class="form-group">
                     <input type="text" value="{{ articulo.nombre_articulo }}" name="new_name" class="form-control form-control-lg">
@@ -69,7 +69,7 @@
             </div>
 
             <!-- Right Column -->
-            <div class="col-4" style="max-height:700px;height:700px;">
+            <div class="col-4">
                 <div class="col-4 ml-auto">
                     <button type="submit" class="btn btn-primary" name="guardar">Guardar</button>
                     <input type="hidden" name="ident" value={{ articulo.id }}>

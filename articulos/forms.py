@@ -1,7 +1,7 @@
 from bootstrap_datepicker_plus import DateTimePickerInput
 from django import forms
 from datetime import datetime,timedelta
-import math
+
 
 class ReservaForm(forms.Form):
     inicio = forms.DateTimeField(
@@ -16,7 +16,7 @@ class ReservaForm(forms.Form):
                     "minDate": (datetime.now()+timedelta(hours=1)).strftime("%m/%d/%Y %H:%M"),
                     "sideBySide": True,
                     "daysOfWeekDisabled": [0,6],
-                    "stepping": 30,
+                    "stepping": 15,
                     "keepInvalid": True,
                 })
     )
@@ -32,7 +32,7 @@ class ReservaForm(forms.Form):
                 "minDate": (datetime.now() + timedelta(hours=1)+timedelta(minutes=30)).strftime("%m/%d/%Y %H:%M"),
                 "sideBySide": True,
                 "daysOfWeekDisabled": [0, 6],
-                "stepping": 30,
+                "stepping": 15,
                 "keepInvalid": True,
             }
         )
