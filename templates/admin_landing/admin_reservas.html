@@ -100,10 +100,10 @@
                                     <input type="checkbox">
                                 </div></td>
                                 <td>{{ prestamo.id }}</td>
-                                {% if reserva.get_cname == 'ReservaArticulo' %}
-                                <td>{{ reserva.articulo.nombre_articulo }}</td>
+                                {% if prestamo.reserva.get_cname == 'ReservaArticulo' %}
+                                <td>{{ prestamo.reserva.articulo.nombre_articulo }}</td>
                                 {% else %}
-                                <td>{{ reserva.espacio.nombre_espacio }}</td>
+                                <td>{{ prestamo.reserva.espacio.nombre_espacio }}</td>
                                 {% endif %}
                                 <td>{{ prestamo.reserva.perfil.nombre }}</td>
                                 <td>{{ prestamo.reserva.inicio }}</td>
