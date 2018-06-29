@@ -3,7 +3,7 @@ from .models import Articulos
 from userprofile.models import Perfil
 from reservas.models import ReservaArticulo
 from django.core.files.storage import FileSystemStorage
-from datetime import datetime,timedelta
+from datetime import datetime
 from django.utils import timezone
 from django.conf import settings
 from .forms import ReservaForm

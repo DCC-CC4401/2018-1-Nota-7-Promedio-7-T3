@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'django_tables2',
     'prestamos.apps.PrestamosConfig',
     'bootstrap_datepicker_plus',
-    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -162,6 +161,12 @@ BOOTSTRAP4 = {
         'inline': 'bootstrap4.renderers.InlineFieldRenderer',
     },
 }
+
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
