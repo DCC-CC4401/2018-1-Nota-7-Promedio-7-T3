@@ -26,11 +26,11 @@ def perfilUsuario(request):
     reservasArticulos = ReservaArticulo.objects.filter(perfil__correo=perfil.correo).order_by('inicio')
     reservasEspacios = ReservaEspacio.objects.filter(perfil__correo=perfil.correo).order_by('inicio')
     lista_reservas = list(reservasArticulos) + list(reservasEspacios)
-    lista_reservas = sorted(lista_reservas, key=lambda x: x.inicio)[0:10]
+    lista_reservas = sorted(lista_reservas, key=lambda x: x.inicio)[0:10][::-1]
     prestamosArticulos = PrestamoArticulo.objects.filter(reserva__perfil__correo=perfil.correo).order_by('reserva__inicio')
     prestamosEspacios = PrestamoEspacio.objects.filter(reserva__perfil__correo=perfil.correo).order_by('reserva__inicio')
     lista_prestamos = list(prestamosArticulos) + list(prestamosEspacios)
-    lista_prestamos = sorted(lista_prestamos, key=lambda x: x.reserva.inicio)[0:10]
+    lista_prestamos = sorted(lista_prestamos, key=lambda x: x.reserva.inicio)[0:10][::-1]
     context ={'perfil': perfil, 'reservas': lista_reservas, 'prestamos':lista_prestamos}
     return render(request, 'vista_perfil.html', context)
 
