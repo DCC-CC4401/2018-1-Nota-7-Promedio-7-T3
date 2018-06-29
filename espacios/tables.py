@@ -29,7 +29,7 @@ class EspaciosTable(tables.Table):
     '''
     class Meta:
         model = Espacios
-        template_name = 'django_tables2/bootstrap.html'
+        template_name = 'django_tables2/bootstrap-responsive.html'
     '''
     Estado = tables.Column()
     Nombre = tables.Column()

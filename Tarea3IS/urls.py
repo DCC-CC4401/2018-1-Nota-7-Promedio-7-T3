@@ -22,6 +22,7 @@ from django.contrib.staticfiles.urls import static
 from django.conf import settings
 from userprofile import views as userprofileviews
 from espacios.views import espaciosView
+from prestamos.views import prestamosView
 from django.conf.urls import url
 
 urlpatterns = [
@@ -38,6 +39,7 @@ urlpatterns = [
     path('', userprofileviews.redirectToHome),
     #path('espacios/', espaciosviews.EspaciosView.espaciosV()),
     url(r'^espacios/', espaciosView),
+    url(r'^prestamos/', prestamosView),
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
