@@ -43,7 +43,7 @@
                         <tr>
                             <th scope="col">Check</th>
                             <th scope="col">ID</th>
-                            <th scope="col">Articulo</th>
+                            <th scope="col">Objeto</th>
                             <th scope="col">Usuario</th>
                             <th scope="col">Inicio</th>
                             <th scope="col">Fin</th>
@@ -53,7 +53,7 @@
                         {% for reserva in lista_reservas %}
                             <tr>
                                 <td><div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                    <input type="checkbox" value="{{ reserva.id }}" name="checks[]">
                                 </div></td>
                                 <td>{{ reserva.id }}</td>
                                 <td>{{ reserva.articulo.nombre_articulo }}</td>
@@ -69,8 +69,8 @@
             <hr/>
             <form action="" method="post">{% csrf_token %}
                 <h3> Prestamos
-                    <button type="submit" class="btn btn-danger float-right" name="perdido">Perdido</button>
-                    <button type="submit" class="btn btn-success float-right" name="recibido">Recibido</button>
+                    <button type="button" class="btn btn-danger float-right" name="perdido">Perdido</button>
+                    <button type="button" class="btn btn-success float-right" name="recibido">Recibido</button>
                     <button type="submit" class="btn btn-primary float-right" name="filtro" value="3">Perdidos</button>
                     <button type="submit" class="btn btn-primary float-right" name="filtro" value="2">Caducados</button>
                     <button type="submit" class="btn btn-primary float-right" name="filtro" value="1">Vigentes</button>
@@ -82,23 +82,25 @@
                         <tr>
                             <th scope="col">Check</th>
                             <th scope="col">ID</th>
-                            <th scope="col">Articulo</th>
+                            <th scope="col">Objeto</th>
                             <th scope="col">Usuario</th>
                             <th scope="col">Inicio</th>
                             <th scope="col">Fin</th>
+                            <th scope="col">Estado</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {% for reserva in lista_reservas %}
+                        {% for prestamo in lista_prestamos %}
                             <tr>
                                 <td><div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                    <input type="checkbox">
                                 </div></td>
-                                <td>{{ reserva.id }}</td>
-                                <td>{{ reserva.articulo.nombre_articulo }}</td>
-                                <td>{{ reserva.perfil.nombre }}</td>
-                                <td>{{ reserva.inicio }}</td>
-                                <td>{{ reserva.final }}</td>
+                                <td>{{ prestamo.id }}</td>
+                                <td>{{ prestamo.reserva.articulo.nombre_articulo }}</td>
+                                <td>{{ prestamo.reserva.perfil.nombre }}</td>
+                                <td>{{ prestamo.reserva.inicio }}</td>
+                                <td>{{ prestamo.reserva.final }}</td>
+                                <td>{{ prestamo.estado_reserva }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>
