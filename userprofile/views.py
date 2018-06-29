@@ -5,7 +5,14 @@ from userlanding.views import busqueda
 from adminlanding.views import reservas
 from django.contrib.auth import views as auth_views
 from reservas.models import ReservaArticulo
+from reservas.models import ReservaEspacio
 from prestamos.models import PrestamoArticulo
+from prestamos.models import PrestamoEspacio
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+from django.shortcuts import render, redirect
+
 
 
 def perfilUsuario(request):
@@ -15,10 +22,14 @@ def perfilUsuario(request):
 
 
     perfil = Perfil.objects.get(correo=request.user.id)
-    reservas = ReservaArticulo.objects.filter(perfil__correo=perfil.correo).order_by('inicio')
-    lista_reservas = list(reservas)
-    prestamos = PrestamoArticulo.objects.filter(reserva__perfil__correo=perfil.correo).order_by('reserva__inicio')
-    lista_prestamos = list(prestamos)
+    reservasArticulos = ReservaArticulo.objects.filter(perfil__correo=perfil.correo).order_by('inicio')
+    reservasEspacios = ReservaEspacio.objects.filter(perfil__correo=perfil.correo).order_by('inicio')
+    lista_reservas = list(reservasArticulos) + list(reservasEspacios)
+    lista_reservas = sorted(lista_reservas, key=lambda x: x.inicio)[0:10]
+    prestamosArticulos = PrestamoArticulo.objects.filter(reserva__perfil__correo=perfil.correo).order_by('reserva__inicio')
+    prestamosEspacios = PrestamoEspacio.objects.filter(reserva__perfil__correo=perfil.correo).order_by('reserva__inicio')
+    lista_prestamos = list(prestamosArticulos) + list(prestamosEspacios)
+    lista_prestamos = sorted(lista_prestamos, key=lambda x: x.reserva.inicio)[0:10]
     context ={'perfil': perfil, 'reservas': lista_reservas, 'prestamos':lista_prestamos}
     return render(request, 'vista_perfil.html', context)
 
@@ -50,3 +61,19 @@ def index(request):
 
 def redirectToHome(request):
     return redirect('/home/')
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'registration/change_password.html', {
+        'form': form
+    })
