@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from articulos import views
 from userlanding import views as user_views
+from adminlanding import views as admin_views
 from django.contrib.auth import views as auth_views
 from django.contrib.staticfiles.urls import static
 from django.conf import settings
@@ -29,8 +30,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/busqueda/', user_views.busqueda, name='nombre_articulo'),
     path('user/espacios', user_views.espacios),
+    path('administracion/reservas/', admin_views.reservas),
+    path('administracion/grilla', admin_views.grilla),
     path('articulos/<int:id_articulo>/', views.id_articulo, name='id_articulo'),
     path('articulos/<int:id_articulo>/edit', views.editar, name='id_articulo'),
+    path('exito/', views.exito),
     path('login/', auth_views.login, name='login'),
     path('logout/', auth_views.logout, name='logout'),
     path('perfil/', userprofileviews.perfilUsuario, name = 'perfilUsuario'),
@@ -40,6 +44,7 @@ urlpatterns = [
     #path('espacios/', espaciosviews.EspaciosView.espaciosV()),
     url(r'^espacios/', espaciosView),
     url(r'^prestamos/', prestamosView),
+    path('change_password/', userprofileviews.change_password, name='change_password'),
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

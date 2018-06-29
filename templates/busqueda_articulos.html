@@ -1,16 +1,11 @@
-<!doctype html>
-<html lang="es">
-<head>
 
+{% extends "GeneralLayout.html" %}
+
+{% block cabeza %}
     <title>Busqueda de artículos</title>
-</head>
-
-{% extends "TopBar.html" %}
+{% endblock %}
 
 {% block content %}
-
-    <body>
-
     <div class="container">
 
         <div class="row" style="height:20px;"></div>
@@ -51,9 +46,20 @@
                     </select>
                 </div>
 
-                <div class="col-12">
-                    <input type="datetime-local" class="form-control"/>
+                <div class="col-6">
+                    Fecha inicio
+                </div>
 
+                <div class="col-6">
+                    Fecha fin
+                </div>
+
+                <div class="col-6">
+                    <input name="fecha-inicio" type="datetime-local" class="form-control"/>
+                </div>
+
+                <div class="col-6">
+                    <input name="fecha-fin" type="datetime-local" class="form-control"/>
                 </div>
 
 
@@ -62,6 +68,10 @@
         </form>
 
     </div>
+
+
+    <div class="row" style="height:20px;"></div>
+
 
     <div class="container">
         <div class="row">
@@ -87,7 +97,4 @@
         </div>
     </div>
 
-
-    </body>
 {% endblock %}
-</html>

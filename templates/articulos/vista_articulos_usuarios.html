@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        /*Color del texto en el estado, aparece como no usado, pero se llama al renderizar*/
+        .Disponible {
+            display: inline-block;
+            background:green;
+            border-radius: 6px;
+            text-align: center;
+            color:white;
+            float:right;
+        }
+        .Prestado {
+            display: inline-block;
+            background:blue;
+            border-radius: 6px;
+            text-align: center;
+            color:white;
+            float:right;
+        }
+        .Reparación {
+            display: inline-block;
+            background:darkorange;
+            border-radius: 6px;
+            text-align: center;
+            color:white;
+            float:right;
+        }
+        .Perdido{
+            display: inline-block;
+            background:darkred;
+            border-radius: 6px;
+            text-align: center;
+            color:white;
+            float:right;
+        }
+        .bodycontainer {max-height: 220px;width: 100%; margin: 0; overflow-y: auto; }
+        /*-------------------*/
+    </style>
+</head>
+{% extends "TopBar.html" %}
+{% block content %}
+    {% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+    {% bootstrap_css %}         {# Embed Bootstrap CSS #}
+    {% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+
+    {% block extrahead %}       {# Extra Resources Start #}
+        {{ form.media }}            {# Form required JS and CSS #}
+    {% endblock %}              {# Extra Resources End #}
+    <div class="container">
+    <div class="row">
+        <!-- Left Column -->
+        <div class="col-8">
+            <h1><span class="pull-left">{{ articulo.nombre_articulo }}</span> &nbsp <span class="{{ estado }}"> &nbsp {{ estado }} &nbsp</span></h1>
+            <br/>
+            <br/>
+            <!-- Foto -->
+            <img style="margin-left: 20px; max-height: 300px;max-width: 500px;" class="img-fluid" src={{ articulo.foto_articulo.url }}/>
+            <br/>
+            <br/>
+            <div class="card">
+                <div class="card-body">
+                    {{ articulo.descripcion_articulo }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="col-4">
+            <form action="" method="post" class="form-horizontal">{% csrf_token %}
+                <h3>Solicitar Reserva</h3>
+                {% bootstrap_form form %}
+                <input type="hidden" name="ident" value={{ articulo.id }}>
+                {% buttons %}
+                    <button type="submit" class="btn btn-primary" name="pedir">Pedir</button>
+                {% endbuttons %}
+            </form>
+            <br/>
+            <h3>Historial Reservas</h3>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Inicio</th>
+                    <th scope="col">Fin</th>
+                </tr>
+                </thead>
+            </table>
+            <div class="bodycontainer scrollable">
+                <table class="table table-hover table-striped table-condensed">
+                    <tbody>
+                    {% for reserva in lista_reservas %}
+                        <tr>
+                            <td>{{ reserva.inicio }}</td>
+                            <td>{{ reserva.final }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+</html>

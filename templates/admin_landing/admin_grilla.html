@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+{% extends "TopBar.html" %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-1" style="margin-top: 250px">
+                <button type="button" class="btn btn-primary">Usuarios</button>
+                <br/>
+                <br/>
+                <button type="button" class="btn btn-secondary">Objetos</button>
+                <br/>
+                <br/>
+                <button type="button" class="btn btn-success">Reservas</button>
+            </div>
+            <div class="col-11">
+                <h1> Administrador </h1>
+                <hr>
+                <div class="container">
+
+                    <div class="row" style="height:20px;"></div>
+
+                    <div class="row">
+                        <div class="column ml-auto">
+                            <a type="button" href="/administracion/reservas" class="btn" role="button">Reservas y Prestamos</a>
+                        </div>
+                        <div class="column mr-auto">
+                            <a type="button" class="btn btn-success" role="button">Grilla Espacios</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+</html>
