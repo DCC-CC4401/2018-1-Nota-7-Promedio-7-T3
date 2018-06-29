@@ -1,22 +1,19 @@
-<!doctype html>
-<html lang="es">
-<head>
+{% extends "GeneralLayout.html" %}
+{% load static %}
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+{% block cabeza %}
 
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
-    <link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
-    <link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}"> <!-- CSS reset -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Resource style -->
 
     <title>Busqueda de espacios</title>
 
-</head>
+{% endblock %}
 
-{% extends "TopBar.html" %}
 
 {% block content %}
-    <body>
     <div class="container">
 
         <div class="row" style="height:20px;"></div>
@@ -29,9 +26,70 @@
                 <a type="button" class="btn btn-success" role="button">Espacios</a>
             </div>
         </div>
-    </div>
 
-    <div class="row" style="height:20px;"></div>
+
+        <div class="row" style="height:20px;"></div>
+
+
+        <div class="container">
+            <form method="GET">
+                <div class="row no-gutters">
+                    <div class="col-7 ml-auto">
+                        <select name="espacio" class="form-control">
+                            <option>Seleccione un espacio</option>
+                            {% for espacio in espacios %}
+                                <option value="{{ espacio.id }}">{{ espacio.nombre_espacio }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-3 mr-auto">
+                        <input type="submit" value="Actualizar" class="form-control">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="row" style="height:20px;"></div>
+
+        <div class="col-12 ml-auto mr-auto">
+            <h1 align="center"> Horarios de {{ seleccionado.nombre_espacio }}</h1>
+        </div>
+
+        <div class="container-fuid">
+            <div class="row">
+                <div class="column mr-auto ml-auto">
+                    {{ semana }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-3 mr-auto">
+                    <form method="GET">
+                        <input style="display:none" type="text" name="espacio" value="{{ seleccionado.id }}">
+                        <input style="display:none" type="text" name="delta" value="{{ deltaSub }}">
+                        <input class="form-control" type="submit" value="<<<">
+                    </form>
+                </div>
+
+                <div class="col-3">
+                    <form method="GET">
+                        <input style="display:none" type="text" name="espacio" value="{{ seleccionado.id }}">
+                        <input style="display:none" type="text" name="delta" value="0">
+                        <input class="form-control" type="submit" value="Semana actual">
+                    </form>
+                </div>
+
+                <div class="col-3 ml-auto">
+                    <form method="GET">
+                        <input style="display:none" type="text" name="espacio" value="{{ seleccionado.id }}">
+                        <input style="display:none" type="text" name="delta" value="{{ deltaPlus }}">
+                        <input class="form-control" type="submit" value=">>>">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <div class="cd-schedule loading">
@@ -222,12 +280,11 @@
         <div class="cover-layer"></div>
     </div>
 
-    <script src="js/modernizr.js"></script>
+
+    <script src="{% static 'js/modernizr.js' %}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script>
         if (!window.jQuery) document.write('<script src="js/jquery-3.0.0.min.js"><\/script>');
     </script>
-    <script src="js/main.js"></script> <!-- Resource jQuery -->
-    </body>
+    <script src="{% static 'js/main.js' %}"></script> <!-- Resource jQuery -->
 {% endblock %}
-</html>

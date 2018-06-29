@@ -163,6 +163,12 @@ BOOTSTRAP4 = {
     },
 }
 
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
