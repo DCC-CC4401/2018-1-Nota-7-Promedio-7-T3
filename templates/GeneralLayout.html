@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
+
     <style>
         ul {
             list-style-type: none;
@@ -40,34 +41,25 @@
         }
 
     </style>
+
+    {% block cabeza %}
+    {% endblock %}
+
 </head>
-<header>
 
-    <ul>
-        <li><img id="LogoCEI" src="/media/cosas/logoCEI2014.png" onclick="" alt="Mountain View" width="70"
-                 height="70"><br></li>
-        <div class="right">
-            <li><a><img id="Mail" src="/media/cosas/mailIcon.png" onclick="" alt="Mountain View" width="50" height="50"></a>
-            </li>
-            <li><a href=""> {{ perfil.nombre }} </a></li>
-            <li><a href="#foto">Foto</a></li>
+{% include "TopBarCode.html" %}
 
-            {% if user.is_authenticated %}
-                <p><a href="{% url 'logout' %}">logout</a></p>
-            {% else %}
-                <p>You are not logged in</p>
-            {% endif %}
-
-        </div>
-    </ul>
-
-</header>
 <body>
 <br/>
-
 {% block content %}
 {% endblock %}
+{% load bootstrap4 %} {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %} {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %} {# Embed Bootstrap JS+jQuery #}
 
+{% block extrahead %}       {# Extra Resources Start #}
+    {{ form.media }}            {# Form required JS and CSS #}
+{% endblock %}              {# Extra Resources End #}
 </body>
 </html>
 
