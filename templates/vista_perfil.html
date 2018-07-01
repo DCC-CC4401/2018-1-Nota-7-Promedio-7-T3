@@ -110,8 +110,14 @@
           <td>{{ reserva.espacio.nombre_espacio }}</td>
           <td>{{ reserva.espacio.descripcion_espacio }}</td>
           {% endif %}
-          <td>   <form action="" method="post">{% csrf_token %}<input type="submit" value="Borrar" name="borrar">
+        {% if reserva.get_cname == 'ReservaArticulo' %}
+          <td>   <form action="" method="post">{% csrf_token %}<input type="submit" value="Borrar" name="borrararticulo">
        <input type="hidden" name="id" value={{ reserva.id }}></form>  </td>
+        {% else %}
+                <td>   <form action="" method="post">{% csrf_token %}<input type="submit" value="Borrar" name="borrarespacio">
+       <input type="hidden" name="id" value={{ reserva.id }}></form>  </td>
+      {% endif %}
+
     </tr>
 
   {% endfor %}
@@ -121,7 +127,7 @@
 </div>
 
 
-<div id="Prestamos" class="tabcontent">
+<div id="Préstamos" class="tabcontent">
     <table class="table">
   <thead>
     <tr>

@@ -17,8 +17,10 @@ from django.shortcuts import render, redirect
 
 def perfilUsuario(request):
     if request.method == 'POST':
-        if 'borrar' in request.POST:
+        if 'borrararticulo' in request.POST:
             ReservaArticulo.objects.filter(pk=request.POST.get("id", "")).delete()
+        elif 'borrarespacio' in request.POST:
+            ReservaEspacio.objects.filter(pk=request.POST.get("id", "")).delete()
 
 
     perfil = Perfil.objects.get(correo=request.user.id)
