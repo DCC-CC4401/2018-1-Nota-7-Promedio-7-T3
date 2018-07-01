@@ -53,7 +53,7 @@
                         {% for reserva in lista_reservas %}
                             <tr>
                                 <td><div class="form-check">
-                                    <input type="checkbox" value="{{ reserva.id }}" name="checks[]">
+                                    <input type="checkbox" value="{{ reserva.id }} {{ reserva.get_cname }}" name="checks[]">
                                 </div></td>
                                 <td>{{ reserva.id }}</td>
                                 {% if reserva.get_cname == 'ReservaArticulo' %}
@@ -108,7 +108,7 @@
                                 <td>{{ prestamo.reserva.perfil.nombre }}</td>
                                 <td>{{ prestamo.reserva.inicio }}</td>
                                 <td>{{ prestamo.reserva.final }}</td>
-                                <td>{{ prestamo.estado_reserva }}</td>
+                                <td>{{ prestamo.get_estado_reserva_display }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>

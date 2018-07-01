@@ -33,12 +33,20 @@ def reservas(request):
         elif 'entregar' in request.POST:
             presionados = request.POST.getlist('checks[]')
             for marcado in presionados:
-                reserva=ReservaArticulo.objects.get(pk=marcado)
-                reserva.estado_reserva = 2
-                query = PrestamoArticulo(reserva=reserva, administrador=perfil, estado_reserva=1)
-                query.save()
-                reserva.save()
-                return HttpResponseRedirect('/administracion/reservas/')
+                info = marcado.split(" ")
+                if 'ReservaArticulo' in info:
+                    reserva = ReservaArticulo.objects.get(pk=info[0])
+                    reserva.estado_reserva = 2
+                    query = PrestamoArticulo(reserva=reserva, administrador=perfil, estado_reserva=1)
+                    query.save()
+                    reserva.save()
+                else:
+                    reserva = ReservaEspacio.objects.get(pk=info[0])
+                    reserva.estado_reserva = 2
+                    query = PrestamoEspacio(reserva=reserva, administrador=perfil, estado_reserva=1)
+                    query.save()
+                    reserva.save()
+            return HttpResponseRedirect('/administracion/reservas/')
         elif 'rechazar' in request.POST:
             presionados = request.POST.getlist('checks[]')
             for marcado in presionados:
