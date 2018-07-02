@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from datetime import date
 from datetime import timedelta
+from datetime import datetime
 from articulos.models import Articulos
 from reservas.models import ReservaArticulo
 from reservas.models import ReservaEspacio
 from espacios.models import Espacios
+from .forms import BusquedaForm
 from django.db.models import Q
 
 
@@ -47,17 +49,25 @@ def busqueda(request):
     if search_status and search_status != '0':
         resultados = resultados.filter(estado_articulo=search_status)
 
-    search_date_st = request.GET.get("fecha-inicio")
-    search_date_fn = request.GET.get("fecha-fin")
+    search_date_st = request.GET.get("fechaInicio")
+    search_date_fn = request.GET.get("fechaFin")
 
     if search_date_fn and search_date_st:
+        search_date_st = datetime.strptime(search_date_st, "%d/%m/%Y %H:%M").date()
+        search_date_fn = datetime.strptime(search_date_fn, "%d/%m/%Y %H:%M").date()
         reservas = reservas.filter(
             Q(inicio__range=(search_date_st, search_date_fn)) | Q(final__range=(search_date_st, search_date_fn)))
         for res in reservas:
             resultados = resultados.exclude(id=res.articulo.id)
 
+    search_id = request.GET.get("id")
+    if search_id:
+        resultados = Articulos.objects.all().filter(id=search_id)
+
+    form = BusquedaForm()
+
     context = {'resultados': resultados, 'nombre': nombre, 'fecha_in': search_date_st, 'fecha_fn': search_date_fn,
-               'reservas': reservas}
+               'reservas': reservas, 'form': form}
     return render(request, 'busqueda_articulos.html', context)
 
 
