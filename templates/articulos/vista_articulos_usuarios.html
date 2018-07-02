@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends "GeneralLayout.html" %}
+{% block cabeza %}
     <style>
         /*Color del texto en el estado, aparece como no usado, pero se llama al renderizar*/
         .Disponible {
@@ -38,8 +37,8 @@
         .bodycontainer {max-height: 220px;width: 100%; margin: 0; overflow-y: auto; }
         /*-------------------*/
     </style>
-</head>
-{% extends "TopBar.html" %}
+{% endblock %}
+
 {% block content %}
     {% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
     {% bootstrap_css %}         {# Embed Bootstrap CSS #}
@@ -101,4 +100,3 @@
         </div>
     </div>
 {% endblock %}
-</html>

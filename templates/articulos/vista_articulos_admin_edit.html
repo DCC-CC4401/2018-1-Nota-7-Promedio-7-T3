@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends "GeneralLayout.html" %}
+{% block cabeza %}
 <style>
     /*Color del texto en el estado, aparece como no usado, pero se llama al renderizar*/
     .Disponible {
@@ -38,8 +37,8 @@
     /*-------------------*/
     .bodycontainer {max-height: 490px;width: 100%; margin: 0; overflow-y: auto; }
 </style>
-</head>
-{% extends "TopBar.html" %}
+{% endblock %}
+
 {% block content %}
     <div class="container">
         <form action="/articulos/{{ articulo.id }}/" method="post" enctype="multipart/form-data">{% csrf_token %}
@@ -102,4 +101,3 @@
         </form>
     </div>
 {% endblock %}
-</html>
