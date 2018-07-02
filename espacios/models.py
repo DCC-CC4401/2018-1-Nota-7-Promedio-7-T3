@@ -10,7 +10,5 @@ class Espacios(models.Model):
     capacidad_espacio = models.IntegerField(default=0)
     foto_espacio = models.ImageField(upload_to='uploads/fotos_espacios', default="")
 
-    '''
     def __str__(self):
         return self.nombre_espacio
-    '''

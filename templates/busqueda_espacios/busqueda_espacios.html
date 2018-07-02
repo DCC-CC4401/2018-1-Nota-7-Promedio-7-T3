@@ -36,7 +36,7 @@
                 <div class="row no-gutters">
                     <div class="col-7 ml-auto">
                         <select name="espacio" class="form-control">
-                            <option>Seleccione un espacio</option>
+                            <option value="0">Seleccione un espacio</option>
                             {% for espacio in espacios %}
                                 <option value="{{ espacio.id }}">{{ espacio.nombre_espacio }}</option>
                             {% endfor %}
@@ -54,6 +54,7 @@
 
         <div class="col-12 ml-auto mr-auto">
             <h1 align="center"> Horarios de {{ seleccionado.nombre_espacio }}</h1>
+
         </div>
 
         <div class="container-fuid">
@@ -123,6 +124,16 @@
                     <div class="top-info"><span>Lunes</span></div>
 
                     <ul>
+                        {% for reserva in lunes %}
+
+                            <li class="single-event" data-start="{{ reserva.inicio|time }}"
+                                data-end="{{ reserva.final|time }}" data-event="event-1">
+                                <a href="#0">
+                                    <em class="event-name">Reservado</em>
+                                </a>
+                            </li>
+
+                        {% endfor %}
 
                     </ul>
                 </li>
@@ -131,33 +142,16 @@
                     <div class="top-info"><span>Martes</span></div>
 
                     <ul>
-                        <li class="single-event" data-start="10:00" data-end="11:00"
-                            data-content="event-rowing-workout" data-event="event-2">
-                            <a href="#0">
-                                <em class="event-name">Rowing Workout</em>
-                            </a>
-                        </li>
+                        {% for reserva in martes %}
 
-                        <li class="single-event" data-start="11:30" data-end="13:00"
-                            data-content="event-restorative-yoga" data-event="event-4">
-                            <a href="#0">
-                                <em class="event-name">Restorative Yoga</em>
-                            </a>
-                        </li>
+                            <li class="single-event" data-start="{{ reserva.inicio|time }}"
+                                data-end="{{ reserva.final|time }}" data-event="event-1">
+                                <a href="#0">
+                                    <em class="event-name">Reservado</em>
+                                </a>
+                            </li>
 
-                        <li class="single-event" data-start="13:30" data-end="15:00"
-                            data-content="event-abs-circuit" data-event="event-1">
-                            <a href="#0">
-                                <em class="event-name">Abs Circuit</em>
-                            </a>
-                        </li>
-
-                        <li class="single-event" data-start="15:45" data-end="16:45" data-content="event-yoga-1"
-                            data-event="event-3">
-                            <a href="#0">
-                                <em class="event-name">Yoga Level 1</em>
-                            </a>
-                        </li>
+                        {% endfor %}
                     </ul>
                 </li>
 
@@ -165,33 +159,16 @@
                     <div class="top-info"><span>Miércoles</span></div>
 
                     <ul>
-                        <li class="single-event" data-start="09:00" data-end="10:15"
-                            data-content="event-restorative-yoga" data-event="event-4">
-                            <a href="#0">
-                                <em class="event-name">Restorative Yoga</em>
-                            </a>
-                        </li>
+                        {% for reserva in miercoles %}
 
-                        <li class="single-event" data-start="10:45" data-end="11:45" data-content="event-yoga-1"
-                            data-event="event-3">
-                            <a href="#0">
-                                <em class="event-name">Yoga Level 1</em>
-                            </a>
-                        </li>
+                            <li class="single-event" data-start="{{ reserva.inicio|time }}"
+                                data-end="{{ reserva.final|time }}" data-event="event-1">
+                                <a href="#0">
+                                    <em class="event-name">Reservado</em>
+                                </a>
+                            </li>
 
-                        <li class="single-event" data-start="12:00" data-end="13:45"
-                            data-content="event-rowing-workout" data-event="event-2">
-                            <a href="#0">
-                                <em class="event-name">Rowing Workout</em>
-                            </a>
-                        </li>
-
-                        <li class="single-event" data-start="13:45" data-end="15:00" data-content="event-yoga-1"
-                            data-event="event-3">
-                            <a href="#0">
-                                <em class="event-name">Yoga Level 1</em>
-                            </a>
-                        </li>
+                        {% endfor %}
                     </ul>
                 </li>
 
@@ -199,33 +176,16 @@
                     <div class="top-info"><span>Jueves</span></div>
 
                     <ul>
-                        <li class="single-event" data-start="09:30" data-end="10:30"
-                            data-content="event-abs-circuit" data-event="event-1">
-                            <a href="#0">
-                                <em class="event-name">Abs Circuit</em>
-                            </a>
-                        </li>
+                        {% for reserva in jueves %}
 
-                        <li class="single-event" data-start="12:00" data-end="13:45"
-                            data-content="event-restorative-yoga" data-event="event-4">
-                            <a href="#0">
-                                <em class="event-name">Restorative Yoga</em>
-                            </a>
-                        </li>
+                            <li class="single-event" data-start="{{ reserva.inicio|time }}"
+                                data-end="{{ reserva.final|time }}" data-event="event-1">
+                                <a href="#0">
+                                    <em class="event-name">Reservado</em>
+                                </a>
+                            </li>
 
-                        <li class="single-event" data-start="15:30" data-end="16:30"
-                            data-content="event-abs-circuit" data-event="event-1">
-                            <a href="#0">
-                                <em class="event-name">Abs Circuit</em>
-                            </a>
-                        </li>
-
-                        <li class="single-event" data-start="17:00" data-end="18:30"
-                            data-content="event-rowing-workout" data-event="event-2">
-                            <a href="#0">
-                                <em class="event-name">Rowing Workout</em>
-                            </a>
-                        </li>
+                        {% endfor %}
                     </ul>
                 </li>
 
@@ -233,26 +193,16 @@
                     <div class="top-info"><span>Viernes</span></div>
 
                     <ul>
-                        <li class="single-event" data-start="10:00" data-end="12:00"
-                            data-content="event-rowing-workout" data-event="event-2">
-                            <a href="#0">
-                                <em class="event-name">Rowing Workout</em>
-                            </a>
-                        </li>
+                        {% for reserva in viernes %}
 
-                        <li class="single-event" data-start="12:30" data-end="14:00"
-                            data-content="event-abs-circuit" data-event="event-1">
-                            <a href="#0">
-                                <em class="event-name">Abs Circuit</em>
-                            </a>
-                        </li>
+                            <li class="single-event" data-start="{{ reserva.inicio|time }}"
+                                data-end="{{ reserva.final|time }}" data-event="event-1">
+                                <a href="#0">
+                                    <em class="event-name">Reservado</em>
+                                </a>
+                            </li>
 
-                        <li class="single-event" data-start="15:45" data-end="16:45" data-content="event-yoga-1"
-                            data-event="event-3">
-                            <a href="#0">
-                                <em class="event-name">Yoga Level 1</em>
-                            </a>
-                        </li>
+                        {% endfor %}
                     </ul>
                 </li>
 
