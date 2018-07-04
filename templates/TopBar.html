@@ -6,68 +6,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
-    <style>
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #ddd;
-        }
 
-        li {
-            float: left;
-        }
-
-        li a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 4px 16px;
-            text-decoration: none;
-        }
-
-        li a:hover {
-            background-color: #888;
-        }
-
-        .right {
-            text-align: right;
-            float: right;
-        }
-
-    </style>
 </head>
-<header>
-
-    <ul>
-        <li><img id="LogoCEI" src="/media/cosas/logoCEI2014.png" onclick="" alt="Mountain View" width="70"
-                 height="70"><br></li>
-        <div class="right">
-            <li><a><img id="Mail" src="/media/cosas/mailIcon.png" onclick="" alt="Mountain View" width="50" height="50"></a>
-            </li>
-            <li><a href=""> {{ perfil.nombre }} </a></li>
-            <li><a href="#foto">Foto</a></li>
-
-            {% if user.is_authenticated %}
-                <p><a href="{% url 'logout' %}">logout</a></p>
-            {% else %}
-                <p>You are not logged in</p>
-            {% endif %}
-
-        </div>
-    </ul>
-
-</header>
 <body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+   <div class='container'>
+      <a class="navbar-brand" href="#">
+          <img id="LogoCEI" src="/media/cosas/logoCEI2014.png" onclick=""  width="70" height="70" class="d-inline-block align-top" alt="">
+      </a>
+      <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarCollapseLinks' aria-expanded='false' aria-label='Toggle Navigation'>
+        <span class='navbar-toggler-icon'></span>
+      </button>
+
+
+
+
+      <div class='collapse navbar-collapse' id='navbarCollapseLinks'>
+        <ul class='navbar-nav ml-auto'>
+          <li class='nav-item'>
+
+              <a href='#' class='nav-link'><img id="Mail" src="/media/cosas/mailIcon.png" onclick="" width="50" height="50"></a>
+
+          </li>
+          <li class='nav-item'>
+              <div>
+                  <a class="" href=""> {{ perfil.nombre }}</a><br/>
+                  <p style="margin-bottom: 0px;"> {{ perfil.rut }}</p>
+                  <p style="margin-bottom: 0px;"> {{ perfil.correo }}</p>
+                  </div>
+          </li>
+
+
+
+            <li class='nav-item'>
+            {% if user.is_authenticated %}
+                <a class='nav-link' href="{% url 'logout' %}"> Cerrar sesión</a>
+            {% else %}
+                <p class="navbar-text">Usted no ha iniciado sesión</p>
+            {% endif %}
+            </li>
+
+
+
+        </ul>
+
+
+      </div>
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+
+
 <br/>
 
 {% block content %}
 {% endblock %}
 
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 </body>
 </html>
 

@@ -41,10 +41,11 @@ INSTALLED_APPS = [
     'articulos.apps.ArticulosConfig',
     'userprofile.apps.UserprofileConfig',
     'reservas.apps.ReservasConfig',
+    'prestamos.apps.PrestamosConfig',
     'bootstrap4',
     'django_tables2',
-    'prestamos.apps.PrestamosConfig',
     'bootstrap_datepicker_plus',
+    'django_extensions'
 ]
 
 MIDDLEWARE = [
