@@ -38,7 +38,11 @@
                         <select name="espacio" class="form-control">
                             <option value="0">Seleccione un espacio</option>
                             {% for espacio in espacios %}
-                                <option value="{{ espacio.id }}">{{ espacio.nombre_espacio }}</option>
+                                {% if espacio.id == seleccionado.id %}
+                                    <option selected="selected" value="{{ espacio.id }}">{{ espacio.nombre_espacio }}</option>
+                                {% else %}
+                                    <option value="{{ espacio.id }}">{{ espacio.nombre_espacio }}</option>
+                                {% endif %}
                             {% endfor %}
                         </select>
                     </div>
@@ -67,8 +71,6 @@
 
         </div>
     </div>
-
-
 
 
     <div class="cd-schedule loading">
