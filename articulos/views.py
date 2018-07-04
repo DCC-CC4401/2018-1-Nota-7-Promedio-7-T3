@@ -58,4 +58,4 @@ def editar(request, id_articulo):
 
 
 def exito(request):
-    return render(request, 'exito.html')
+    return render(request, 'Layouts/exito.html')

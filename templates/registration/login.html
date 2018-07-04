@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Iniciar Sesion</title>
-</head>
-<body>
 
-{% extends "TopBar.html" %}
+{% extends "Layouts/GeneralLayout.html" %}
+{% block cabeza %}
+    <title>Iniciar Sesion</title>
+{% endblock %}
 {% block content %}
     {% load bootstrap4 %}
     <div class="container">

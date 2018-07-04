@@ -33,7 +33,7 @@ def perfilUsuario(request):
     lista_prestamos = list(prestamosArticulos) + list(prestamosEspacios)
     lista_prestamos = sorted(lista_prestamos, key=lambda x: x.reserva.inicio)[0:10][::-1]
     context ={'perfil': perfil, 'reservas': lista_reservas, 'prestamos':lista_prestamos}
-    return render(request, 'vista_perfil.html', context)
+    return render(request, 'perfil/vista_perfil.html', context)
 
 
 def signup(request):
