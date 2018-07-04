@@ -68,7 +68,7 @@ def busqueda(request):
 
     context = {'resultados': resultados, 'nombre': nombre, 'fecha_in': search_date_st, 'fecha_fn': search_date_fn,
                'reservas': reservas, 'form': form}
-    return render(request, 'busqueda_articulos.html', context)
+    return render(request, 'user_landing/busqueda_articulos.html', context)
 
 
 def espacios(request):
@@ -109,4 +109,4 @@ def espacios(request):
                'deltaSub': delta - 1, 'semana': semana, 'lunes': reservas_mon, 'martes': reservas_tue,
                'miercoles': reservas_wed, 'jueves': reservas_thu, 'viernes': reservas_fri}
 
-    return render(request, 'busqueda_espacios/busqueda_espacios.html', context)
+    return render(request, 'user_landing/busqueda_espacios.html', context)
