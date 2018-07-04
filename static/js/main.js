@@ -105,6 +105,7 @@ jQuery(document).ready(function($){
 		this.element.removeClass('loading');
 	};
 
+	/* Codigo para agrandar la vista del horario
 	SchedulePlan.prototype.openModal = function(event) {
 		var self = this;
 		var mq = self.mq();
@@ -255,7 +256,7 @@ jQuery(document).ready(function($){
 		//browser do not support transitions -> no need to wait for the end of it
 		if( !transitionsSupported ) self.modal.add(self.modalHeaderBg).trigger(transitionEnd);
 	}
-
+	*/
 	SchedulePlan.prototype.mq = function(){
 		//get MQ value ('desktop' or 'mobile') 
 		var self = this;

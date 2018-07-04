@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends "GeneralLayout.html" %}
+{% block cabeza %}
     <style>
         .bodycontainer {max-height: 220px;width: 100%; margin: 0; overflow-y: auto; }
     </style>
-</head>
-{% extends "TopBar.html" %}
+{% endblock %}
+
 {% block content %}
     <div class="container">
         <div class="row">
@@ -119,4 +118,3 @@
         </div>
     </div>
 {% endblock %}
-</html>

@@ -1,4 +1,3 @@
-
 {% extends "GeneralLayout.html" %}
 
 {% block cabeza %}
@@ -6,6 +5,16 @@
 {% endblock %}
 
 {% block content %}
+
+    {% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+    {% bootstrap_css %}         {# Embed Bootstrap CSS #}
+    {% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+
+    {% block extrahead %}       {# Extra Resources Start #}
+        {{ form.media }}            {# Form required JS and CSS #}
+    {% endblock %}              {# Extra Resources End #}
+
+
     <div class="container">
 
         <div class="row" style="height:20px;"></div>
@@ -21,22 +30,17 @@
     </div>
 
     <div class="row" style="height:20px;"></div>
-
     <div class="container">
         <form method="GET" action="">
 
 
             <div class="row no-gutters">
-                <div class="col-10">
+                <div class="col-6">
                     <input type="text" name="nombre" value="{{ nombre }}" placeholder="Nombre artículo"
                            class="form-control"/>
                 </div>
-                <div class="col-2">
-                    <input type="submit" value="Buscar" class="form-control"/>
-                </div>
 
-
-                <div class="col-12">
+                <div class="col-4">
                     <select name="estado" class="form-control">
                         <option value="0">Disponibilidad</option>
                         <option value="1">Disponible</option>
@@ -46,20 +50,19 @@
                     </select>
                 </div>
 
-                <div class="col-6">
-                    Fecha inicio
+                <div class="col-2">
+                    <input type="submit" value="Buscar" class="form-control"/>
                 </div>
 
-                <div class="col-6">
-                    Fecha fin
-                </div>
 
-                <div class="col-6">
-                    <input name="fecha-inicio" type="datetime-local" class="form-control"/>
-                </div>
+                {% bootstrap_form form %}
 
-                <div class="col-6">
-                    <input name="fecha-fin" type="datetime-local" class="form-control"/>
+
+                <div class="row no-gutters">
+                    <div class="col-12 mb-0 pb-0">ID:</div>
+                    <div class="col-12 mt-0 pt-0">
+                        <input name="id" type="number" class="form-control">
+                    </div>
                 </div>
 
 
@@ -74,6 +77,7 @@
 
 
     <div class="container">
+        <hr>
         <div class="row">
             {% for articulo in resultados %}
                 <div class="col-6 col-sm-6 col-md-4 col-lg-3">
@@ -86,6 +90,18 @@
                                 </a>
                             </div>
                             <div class="col-12">
+                                {% if articulo.estado_articulo == 1 %}
+                                    <span class="dot" style="background-color:green;"></span>
+                                {% endif %}
+                                {% if articulo.estado_articulo == 2 %}
+                                    <span class="dot" style="background-color:blue;"></span>
+                                {% endif %}
+                                {% if articulo.estado_articulo == 3 %}
+                                    <span class="dot" style="background-color:darkorange;"></span>
+                                {% endif %}
+                                {% if articulo.estado_articulo == 4 %}
+                                    <span class="dot" style="background-color:darkred;"></span>
+                                {% endif %}
                                 <a href="/articulos/{{ articulo.id }}"
                                    class="badge"> {{ articulo.nombre_articulo }}</a>
                             </div>
@@ -93,7 +109,14 @@
                     </div>
                 </div>
 
+
+            {% empty %}
+
+                <h1>Sin resultados</h1>
+
             {% endfor %}
+
+
         </div>
     </div>
 

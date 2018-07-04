@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
-    <head>
+    {% extends "GeneralLayout.html.html" %}
+    {% block cabeza %}
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
@@ -42,11 +41,10 @@
 
         <title>Espacios </title>
 
-    </head>
+    {% endblock %}
 
-    {% extends "TopBar.html" %}
+
     {% block content %}
-    <body>
 
         <h2>Grilla de espacios</h2>
 
@@ -83,9 +81,7 @@
                 }
             }
         </script>
-    </body>
 
 {% endblock %}
-</html>
 
 

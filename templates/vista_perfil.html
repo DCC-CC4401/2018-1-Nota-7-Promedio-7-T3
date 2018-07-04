@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends "GeneralLayout.html.html" %}
+{% block cabeza %}
     <meta charset="UTF-8">
     <title>Title</title>
-</head>
+
 
 <style>/* Style the tab */
 .tab {
@@ -62,12 +61,10 @@
     evt.currentTarget.className += " active";
 }</script>
 
+{% endblock %}
 
 
-{% extends "TopBar.html" %}
 {% block content %}
-
-<body>
 
 <div class="container">
 
@@ -160,6 +157,5 @@
 </div>
 
 
-</body>
 {% endblock %}
-</html>
+
