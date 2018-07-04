@@ -82,7 +82,7 @@
 <!-- Tab links -->
 <div class="tab">
   <button class="tablinks" onclick="openCity(event, 'Reservas')">Reservas</button>
-  <button class="tablinks" onclick="openCity(event, 'Prestamos')">Prestamos</button>
+  <button class="tablinks" onclick="openCity(event, 'Prestamos')">Préstamos</button>
 </div>
 
 
@@ -110,8 +110,14 @@
           <td>{{ reserva.espacio.nombre_espacio }}</td>
           <td>{{ reserva.espacio.descripcion_espacio }}</td>
           {% endif %}
-          <td>   <form action="" method="post">{% csrf_token %}<input type="submit" value="Borrar" name="borrar">
+        {% if reserva.get_cname == 'ReservaArticulo' %}
+          <td>   <form action="" method="post">{% csrf_token %}<input type="submit" value="Borrar" name="borrararticulo">
        <input type="hidden" name="id" value={{ reserva.id }}></form>  </td>
+        {% else %}
+                <td>   <form action="" method="post">{% csrf_token %}<input type="submit" value="Borrar" name="borrarespacio">
+       <input type="hidden" name="id" value={{ reserva.id }}></form>  </td>
+      {% endif %}
+
     </tr>
 
   {% endfor %}
