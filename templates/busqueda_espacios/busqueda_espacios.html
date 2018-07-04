@@ -64,33 +64,10 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-3 mr-auto">
-                    <form method="GET">
-                        <input style="display:none" type="text" name="espacio" value="{{ seleccionado.id }}">
-                        <input style="display:none" type="text" name="delta" value="{{ deltaSub }}">
-                        <input class="form-control" type="submit" value="<<<">
-                    </form>
-                </div>
 
-                <div class="col-3">
-                    <form method="GET">
-                        <input style="display:none" type="text" name="espacio" value="{{ seleccionado.id }}">
-                        <input style="display:none" type="text" name="delta" value="0">
-                        <input class="form-control" type="submit" value="Semana actual">
-                    </form>
-                </div>
-
-                <div class="col-3 ml-auto">
-                    <form method="GET">
-                        <input style="display:none" type="text" name="espacio" value="{{ seleccionado.id }}">
-                        <input style="display:none" type="text" name="delta" value="{{ deltaPlus }}">
-                        <input class="form-control" type="submit" value=">>>">
-                    </form>
-                </div>
-            </div>
         </div>
     </div>
+
 
 
 
@@ -217,6 +194,34 @@
         </div>
 
         <div class="cover-layer"></div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-3 ml-auto">
+                <form method="GET">
+                    <input style="display:none" type="text" name="espacio" value="{{ seleccionado.id }}">
+                    <input style="display:none" type="text" name="delta" value="{{ deltaSub }}">
+                    <input class="form-control" type="submit" value="<<<">
+                </form>
+            </div>
+
+            <div class="col-3">
+                <form method="GET">
+                    <input style="display:none" type="text" name="espacio" value="{{ seleccionado.id }}">
+                    <input style="display:none" type="text" name="delta" value="0">
+                    <input class="form-control" type="submit" value="Semana actual">
+                </form>
+            </div>
+
+            <div class="col-3 mr-auto">
+                <form method="GET">
+                    <input style="display:none" type="text" name="espacio" value="{{ seleccionado.id }}">
+                    <input style="display:none" type="text" name="delta" value="{{ deltaPlus }}">
+                    <input class="form-control" type="submit" value=">>>">
+                </form>
+            </div>
+        </div>
     </div>
 
 
