@@ -16,7 +16,7 @@ def reservas(request):
     lista_reservas = list(reservas_articulos)+list(reservas_espacios)
     lista_prestamos = list(prestamos_articulos)+list(prestamos_espacios)
     lista_reservas.sort(key=lambda x: x.inicio)
-    lista_prestamos.sort(key=lambda x: x.reserva.inicio, reverse=True)
+    lista_prestamos.sort(key=lambda x: x.reserva.inicio)
     if request.method == 'POST':
         if 'todos' in request.POST:
             prestamos_articulos = PrestamoArticulo.objects.all()
@@ -33,12 +33,20 @@ def reservas(request):
         elif 'entregar' in request.POST:
             presionados = request.POST.getlist('checks[]')
             for marcado in presionados:
-                reserva=ReservaArticulo.objects.get(pk=marcado)
-                reserva.estado_reserva = 2
-                query = PrestamoArticulo(reserva=reserva, administrador=perfil, estado_reserva=1)
-                query.save()
-                reserva.save()
-                return HttpResponseRedirect('/administracion/reservas/')
+                info = marcado.split(" ")
+                if 'ReservaArticulo' in info:
+                    reserva = ReservaArticulo.objects.get(pk=info[0])
+                    reserva.estado_reserva = 2
+                    query = PrestamoArticulo(reserva=reserva, administrador=perfil, estado_reserva=1)
+                    query.save()
+                    reserva.save()
+                else:
+                    reserva = ReservaEspacio.objects.get(pk=info[0])
+                    reserva.estado_reserva = 2
+                    query = PrestamoEspacio(reserva=reserva, administrador=perfil, estado_reserva=1)
+                    query.save()
+                    reserva.save()
+            return HttpResponseRedirect('/administracion/reservas/')
         elif 'rechazar' in request.POST:
             presionados = request.POST.getlist('checks[]')
             for marcado in presionados:

@@ -17,7 +17,6 @@ def id_articulo(request, id_articulo):
     lista_reservas=list(reservas)
     lista_reservas.sort(key=lambda x: x.final, reverse=True)
     lista_reservas = lista_reservas[:10]
-    estado = articulo.ESTADOS_ART[articulo.estado_articulo - 1][1]
     if request.user.is_superuser:
         if request.method == 'POST':
             if 'guardar' in request.POST:
@@ -31,7 +30,7 @@ def id_articulo(request, id_articulo):
                     articulo.foto_articulo = fs.save(new_path,myfile)
                     fs.delete(old_path)
                 articulo.save()
-        context = {'articulo': articulo, 'perfil': perfil, 'lista_reservas': lista_reservas, 'estado': estado}
+        context = {'articulo': articulo, 'perfil': perfil, 'lista_reservas': lista_reservas}
         return render(request, 'articulos/vista_articulos_admin.html', context)
     else:
         if request.method == 'POST':
@@ -43,19 +42,18 @@ def id_articulo(request, id_articulo):
                     return HttpResponseRedirect('/exito/')
         else:
             form = ReservaForm()
-        context = {'articulo': articulo, 'perfil': perfil, 'lista_reservas': lista_reservas, 'estado': estado, 'form': form}
+        context = {'articulo': articulo, 'perfil': perfil, 'lista_reservas': lista_reservas, 'form': form}
         return render(request, 'articulos/vista_articulos_usuarios.html', context)
 
 
 def editar(request, id_articulo):
     perfil = Perfil.objects.get(correo=request.user.id)
     articulo = Articulos.objects.get(pk=id_articulo)
-    estado = articulo.ESTADOS_ART[articulo.estado_articulo - 1][1]
     reservas = ReservaArticulo.objects.filter(articulo=articulo, final__lt=timezone.make_aware(datetime.today(), timezone.get_current_timezone()))
     lista_reservas=list(reservas)
     lista_reservas.sort(key=lambda x: x.final, reverse=True)
     lista_reservas = lista_reservas[:10]
-    context = {'articulo': articulo, 'estado': estado, 'perfil': perfil, 'lista_reservas': lista_reservas}
+    context = {'articulo': articulo, 'perfil': perfil, 'lista_reservas': lista_reservas}
     return render(request, 'articulos/vista_articulos_admin_edit.html', context)
 
 

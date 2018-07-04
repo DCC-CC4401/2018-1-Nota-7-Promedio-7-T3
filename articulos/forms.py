@@ -28,8 +28,8 @@ class ReservaForm(forms.Form):
                 "showClose": True,
                 "showClear": True,
                 "showTodayButton": False,
-                "defaultDate": (datetime.now() + timedelta(hours=1)+timedelta(minutes=30)).strftime("%m/%d/%Y %H:%M"),
-                "minDate": (datetime.now() + timedelta(hours=1)+timedelta(minutes=30)).strftime("%m/%d/%Y %H:%M"),
+                "defaultDate": (datetime.now() + timedelta(hours=1, minutes=30)).strftime("%m/%d/%Y %H:%M"),
+                "minDate": (datetime.now() + timedelta(hours=1, minutes=30)).strftime("%m/%d/%Y %H:%M"),
                 "sideBySide": True,
                 "daysOfWeekDisabled": [0, 6],
                 "stepping": 15,
@@ -54,3 +54,6 @@ class ReservaForm(forms.Form):
             if fin.hour < 9 or (fin.hour == 18 and fin.minute > 0) or fin.hour > 18:
                 msg = "La hora de fin debe estar entre las 9:00 y 18:00."
                 self.add_error('fin', msg)
+            if abs((inicio.hour*60+inicio.minute)-(datetime.now().hour*60+datetime.now().minute)):
+                msg = "La hora de inicio debe ser en al menos una hora más."
+                self.add_error('inicio', msg)
