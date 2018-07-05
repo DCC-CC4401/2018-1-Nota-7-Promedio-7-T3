@@ -17,23 +17,51 @@
               <a href='#' class='nav-link'><img id="Mail" src="/media/cosas/mailIcon.png" onclick="" width="50" height="50"></a>
 
           </li>
-          <li class='nav-item'>
-              <div>
-                  <a class="" href=""> {{ perfil.nombre }}</a><br/>
-                  <p style="margin-bottom: 0px;"> {{ perfil.rut }}</p>
-                  <p style="margin-bottom: 0px;"> {{ perfil.correo }}</p>
-                  </div>
-          </li>
 
-
-
-            <li class='nav-item'>
             {% if user.is_authenticated %}
-                <a class='nav-link' href="{% url 'logout' %}"> Cerrar sesión</a>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <strong>{{ perfil.nombre }}</strong>
+
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="navbar-login">
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <p class="text-left"><strong> {{ perfil.nombre }}</strong></p>
+                                        <p class="text-left small">{{ perfil.rut }}</p>
+                                        <p class="text-left small">{{ perfil.correo }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <div class="navbar-login navbar-login-session">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <p>
+                                            <a href="{% url 'change_password' %}" class="btn btn-primary btn-block btn-sm">Cambiar contraseña</a>
+                                        </p>
+                                        <p>
+                                            <a href="{% url 'logout' %}" class="btn btn-danger btn-block">Cerrar Sesión</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </li>
+
             {% else %}
-                <p class="navbar-text">Usted no ha iniciado sesión</p>
+                <li class='nav-item'>
+                   <p class="navbar-text">Usted no ha iniciado sesión</p>
+                </li>
             {% endif %}
-            </li>
+
+
 
 
 
