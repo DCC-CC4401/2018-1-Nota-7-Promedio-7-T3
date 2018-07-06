@@ -1,22 +1,24 @@
 {% extends "Layouts/GeneralLayout.html" %}
 {% block cabeza %}
-<style>
-    /*Color del texto en el estado, aparece como no usado, pero se llama al renderizar*/
-    .Disponible {
-        display: inline-block;
-        background:green;
-        border-radius: 6px;
-        text-align: center;
-        color:white;
-        float:right;
-    }
-    .Prestado {
-        display: inline-block;
-        background:blue;
-        border-radius: 6px;
-        text-align: center;
-        color:white;
-        float:right;
+    <meta charset="UTF-8">
+    <title>{{ articulo.nombre_articulo }}</title>
+    <style>
+        /*Color del texto en el estado, aparece como no usado, pero se llama al renderizar*/
+        .Disponible {
+            display: inline-block;
+            background:green;
+            border-radius: 6px;
+            text-align: center;
+            color:white;
+            float:right;
+        }
+        .Prestado {
+            display: inline-block;
+            background:blue;
+            border-radius: 6px;
+            text-align: center;
+            color:white;
+            float:right;
     }
     .Reparación {
         display: inline-block;
