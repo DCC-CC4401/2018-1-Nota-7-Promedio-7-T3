@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from datetime import date
 from datetime import timedelta
 from datetime import datetime
@@ -6,6 +6,7 @@ from articulos.models import Articulos
 from reservas.models import ReservaArticulo
 from reservas.models import ReservaEspacio
 from espacios.models import Espacios
+from userprofile.models import Perfil
 from .forms import BusquedaForm
 from django.db.models import Q
 
@@ -36,6 +37,9 @@ def week_range(date):
 
 
 def busqueda(request):
+    if not request.user.is_authenticated:
+        return redirect('/home/')
+
     nombre = ""
     resultados = Articulos.objects.all()
     reservas = ReservaArticulo.objects.all()
@@ -66,12 +70,17 @@ def busqueda(request):
 
     form = BusquedaForm()
 
+    perfil = Perfil.objects.get(correo=request.user.id)
+
     context = {'resultados': resultados, 'nombre': nombre, 'fecha_in': search_date_st, 'fecha_fn': search_date_fn,
-               'reservas': reservas, 'form': form}
+               'reservas': reservas, 'form': form, 'perfil': perfil}
     return render(request, 'user_landing/busqueda_articulos.html', context)
 
 
 def espacios(request):
+    if not request.user.is_authenticated:
+        return redirect('/home/')
+
     todo_espacios = Espacios.objects.all()
 
     reservas = ReservaEspacio.objects.all()
@@ -105,8 +114,10 @@ def espacios(request):
     reservas_thu = reservas.filter(inicio__day=thu.day).filter(inicio__month=thu.month).filter(inicio__year=thu.year)
     reservas_fri = reservas.filter(inicio__day=fri.day).filter(inicio__month=fri.month).filter(inicio__year=fri.year)
 
+    perfil = Perfil.objects.get(correo=request.user.id)
+
     context = {'espacios': todo_espacios, 'seleccionado': espacio_seleccionado, 'deltaPlus': delta + 1,
                'deltaSub': delta - 1, 'semana': semana, 'lunes': reservas_mon, 'martes': reservas_tue,
-               'miercoles': reservas_wed, 'jueves': reservas_thu, 'viernes': reservas_fri}
+               'miercoles': reservas_wed, 'jueves': reservas_thu, 'viernes': reservas_fri, 'perfil': perfil}
 
     return render(request, 'user_landing/busqueda_espacios.html', context)
