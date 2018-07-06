@@ -16,6 +16,7 @@ from django.shortcuts import render, redirect
 
 
 def perfilUsuario(request):
+    if not request.user.is_authenticated: return redirect('/home/')
     if request.method == 'POST':
         if 'borrararticulo' in request.POST:
             ReservaArticulo.objects.filter(pk=request.POST.get("id", "")).delete()
@@ -65,6 +66,7 @@ def redirectToHome(request):
     return redirect('/home/')
 
 def change_password(request):
+    if not request.user.is_authenticated: return redirect('/home/')
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
