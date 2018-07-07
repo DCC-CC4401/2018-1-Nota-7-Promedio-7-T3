@@ -1,0 +1,167 @@
+{% extends "Layouts/GeneralLayout.html" %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block cabeza %}
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}"> <!-- CSS reset -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Resource style -->
+    <title>Perfil de Usuario</title>
+
+
+<style>/* Style the tab */
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}</style>
+
+<script>function openCity(evt, cityName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}</script>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+
+{% if perfil.habilitado %}
+<h1> Estado de Usuario: Habilitado </h1>
+{% else %}
+<h1> Estado de Usuario: Inhabilitado </h1>
+{% endif %}
+
+
+
+<!-- Tab links -->
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'Reservas')">Reservas</button>
+  <button class="tablinks" onclick="openCity(event, 'Prestamos')">Préstamos</button>
+</div>
+
+
+
+<!-- Tab content -->
+<div id="Reservas" class="tabcontent">
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Fecha</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Detalle</th>
+        <th scope="col">Eliminar</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  {% for reserva in reservas %}
+      <tr>
+      <th scope="row"> {{ reserva.inicio }} </th>
+          {% if reserva.get_cname == 'ReservaArticulo' %}
+          <td>{{ reserva.articulo.nombre_articulo }}</td>
+          <td>{{ reserva.articulo.descripcion_articulo }}</td>
+          {% else %}
+          <td>{{ reserva.espacio.nombre_espacio }}</td>
+          <td>{{ reserva.espacio.descripcion_espacio }}</td>
+          {% endif %}
+        {% if reserva.get_cname == 'ReservaArticulo' %}
+          <td>   <form action="" method="post">{% csrf_token %}<input type="submit" value="Borrar" name="borrararticulo">
+       <input type="hidden" name="id" value={{ reserva.id }}></form>  </td>
+        {% else %}
+                <td>   <form action="" method="post">{% csrf_token %}<input type="submit" value="Borrar" name="borrarespacio">
+       <input type="hidden" name="id" value={{ reserva.id }}></form>  </td>
+      {% endif %}
+
+    </tr>
+
+  {% endfor %}
+
+  </tbody>
+</table>
+</div>
+
+
+<div id="Prestamos" class="tabcontent">
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Fecha</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Detalle</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  {% for prestamo in prestamos %}
+      <tr>
+      <th scope="row"> {{ prestamo.reserva.inicio }} </th>
+          {% if prestamo.reserva.get_cname == 'ReservaArticulo' %}
+          <td>{{ prestamo.reserva.articulo.nombre_articulo }}</td>
+          <td>{{ prestamo.reserva.articulo.descripcion_articulo }}</td>
+          {% else %}
+          <td>{{ prestamo.reserva.espacio.nombre_espacio }}</td>
+          <td>{{ prestamo.reserva.espacio.descripcion_espacio }}</td>
+          {% endif %}
+    </tr>
+
+  {% endfor %}
+
+  </tbody>
+</table>
+
+</div>
+
+</div>
+
+
+{% endblock %}
+

@@ -1,0 +1,118 @@
+{% extends "Layouts/GeneralLayout.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% block cabeza %}
+    <title>Búsqueda de artículos</title>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}"> <!-- CSS reset -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Resource style -->
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+
+        <div class="row" style="height:20px;"></div>
+
+        <div class="row">
+            <div class="column ml-auto">
+                <a type="button" class="btn btn-success" role="button">Artículos</a>
+            </div>
+            <div class="column mr-auto">
+                <a type="button" href="/user/espacios" class="btn" role="button">Espacios</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="height:20px;"></div>
+    <div class="container">
+        <form method="GET" action="">
+
+
+            <div class="row no-gutters">
+                <div class="col-6">
+                    <input type="text" name="nombre" value="{{ nombre }}" placeholder="Nombre artículo"
+                           class="form-control"/>
+                </div>
+
+                <div class="col-4">
+                    <select name="estado" class="form-control">
+                        <option value="0">Disponibilidad</option>
+                        <option value="1">Disponible</option>
+                        <option value="2">Prestado</option>
+                        <option value="3">En reparación</option>
+                        <option value="4">Perdido</option>
+                    </select>
+                </div>
+
+                <div class="col-2">
+                    <input type="submit" value="Buscar" class="form-control"/>
+                </div>
+
+
+                {% bootstrap_form form %}
+
+
+                <div class="row no-gutters">
+                    <div class="col-12 mb-0 pb-0">ID:</div>
+                    <div class="col-12 mt-0 pt-0">
+                        <input name="id" type="number" class="form-control">
+                    </div>
+                </div>
+
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <div class="row" style="height:20px;"></div>
+
+
+    <div class="container">
+        <hr>
+        <div class="row">
+            {% for articulo in resultados %}
+                <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <a href="/articulos/{{ articulo.id }} " class="badge"> <img
+                                        class='img-thumbnail img-fluid'
+                                        src={{ articulo.foto_articulo.url }}/>
+                                </a>
+                            </div>
+                            <div class="col-12">
+                                {% if articulo.estado_articulo == 1 %}
+                                    <span class="dot" style="background-color:green;"></span>
+                                {% endif %}
+                                {% if articulo.estado_articulo == 2 %}
+                                    <span class="dot" style="background-color:blue;"></span>
+                                {% endif %}
+                                {% if articulo.estado_articulo == 3 %}
+                                    <span class="dot" style="background-color:darkorange;"></span>
+                                {% endif %}
+                                {% if articulo.estado_articulo == 4 %}
+                                    <span class="dot" style="background-color:darkred;"></span>
+                                {% endif %}
+                                <a href="/articulos/{{ articulo.id }}"
+                                   class="badge"> {{ articulo.nombre_articulo }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            {% empty %}
+
+                <h1>Sin resultados</h1>
+
+            {% endfor %}
+
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,76 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+   <div class='container'>
+      <a class="navbar-brand" href="{% url 'home' %}">
+          <img id="LogoCEI" src="/media/cosas/logoCEI2014.png" onclick="" width="70" height="70" class="d-inline-block align-top" alt="">
+      </a>
+      <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarCollapseLinks' aria-expanded='false' aria-label='Toggle Navigation'>
+        <span class='navbar-toggler-icon'></span>
+      </button>
+
+
+
+
+      <div class='collapse navbar-collapse' id='navbarCollapseLinks'>
+        <ul class='navbar-nav ml-auto'>
+          <li class='nav-item'>
+
+              <a href='#' class='nav-link'><img id="Mail" src="/media/cosas/mailIcon.png" onclick="" width="50" height="50"></a>
+
+          </li>
+
+            {% if user.is_authenticated %}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <strong>{{ perfil.nombre }}</strong>
+
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="navbar-login">
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <p class="text-left"><strong> {{ perfil.nombre }}</strong></p>
+                                        <p class="text-left small">{{ perfil.rut }}</p>
+                                        <p class="text-left small">{{ perfil.correo }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <div class="navbar-login navbar-login-session">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <p>
+                                            <a href="{% url 'perfilUsuario' %}" class="btn btn-warning btn-block btn-sm">Ir al Perfil</a>
+                                        </p>
+                                        <p>
+                                            <a href="{% url 'change_password' %}" class="btn btn-primary btn-block btn-sm">Cambiar contraseña</a>
+                                        </p>
+                                        <p>
+                                            <a href="{% url 'logout' %}" class="btn btn-danger btn-block">Cerrar Sesión</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </li>
+
+            {% else %}
+                <li class='nav-item'>
+                   <p class="navbar-text">Usted no ha iniciado sesión</p>
+                </li>
+            {% endif %}
+
+
+
+
+
+        </ul>
+
+
+      </div>
+  </div>
+</nav>

@@ -7,5 +7,7 @@ class Articulos(models.Model):
     estado_articulo = models.IntegerField(choices=ESTADOS_ART, default=1)
     nombre_articulo = models.CharField(max_length=200)
     descripcion_articulo = models.CharField(max_length=1500)
-    id_articulo = models.IntegerField()
     foto_articulo = models.ImageField(upload_to='uploads/fotos_articulos')
+
+    def __str__(self):
+        return self.nombre_articulo

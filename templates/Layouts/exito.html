@@ -1,0 +1,27 @@
+{% extends "Layouts/GeneralLayout.html" %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block cabeza %}
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}"> <!-- CSS reset -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Resource style -->
+    <title>Éxito</title>
+{% endblock %}
+<body>
+
+{% block content %}
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h1 class="display-3">¡Éxito!</h1>
+            <hr>
+            <p>
+                ¿Problemas? <a href="">Contáctenos</a>
+            </p>
+            <p class="lead">
+                <a class="btn btn-primary btn-sm" href="/home/" role="button">Volver al inicio</a>
+            </p>
+        </div>
+    </div>
+{% endblock %}

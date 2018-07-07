@@ -1,0 +1,236 @@
+{% extends "Layouts/GeneralLayout.html" %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block cabeza %}
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}"> <!-- CSS reset -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Resource style -->
+
+    <title>Búsqueda de espacios</title>
+
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+
+        <div class="row" style="height:20px;"></div>
+
+        <div class="row">
+            <div class="column ml-auto">
+                <a type="button" href="/user/busqueda" class="btn" role="button">Artículos</a>
+            </div>
+            <div class="column mr-auto">
+                <a type="button" class="btn btn-success" role="button">Espacios</a>
+            </div>
+        </div>
+
+
+        <div class="row" style="height:20px;"></div>
+
+
+        <div class="container">
+            <form method="GET">
+                <div class="row no-gutters">
+                    <div class="col-7 ml-auto">
+                        <select name="espacio" class="form-control">
+                            <option value="0">Seleccione un espacio</option>
+                            {% for espacio in espacios %}
+                                {% if espacio.id == seleccionado.id %}
+                                    <option selected="selected" value="{{ espacio.id }}">{{ espacio.nombre_espacio }}</option>
+                                {% else %}
+                                    <option value="{{ espacio.id }}">{{ espacio.nombre_espacio }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-3 mr-auto">
+                        <input type="submit" value="Actualizar" class="form-control">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="row" style="height:20px;"></div>
+
+        <div class="col-12 ml-auto mr-auto">
+            <h1 align="center"> Horarios de {{ seleccionado.nombre_espacio }}</h1>
+
+        </div>
+
+        <div class="container-fuid">
+            <div class="row">
+                <div class="column mr-auto ml-auto">
+                    {{ semana }}
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <div class="cd-schedule loading">
+        <div class="timeline">
+            <ul>
+                <li><span>09:00</span></li>
+                <li><span>10:30</span></li>
+                <li><span>12:00</span></li>
+                <li><span>13:30</span></li>
+                <li><span>15:00</span></li>
+                <li><span>16:30</span></li>
+                <li><span>18:00</span></li>
+            </ul>
+        </div> <!-- .timeline -->
+
+        <div class="events">
+            <ul>
+                <li class="events-group">
+                    <div class="top-info"><span>Lunes</span></div>
+
+                    <ul>
+                        {% for reserva in lunes %}
+
+                            <li class="single-event" data-start="{{ reserva.inicio|time }}"
+                                data-end="{{ reserva.final|time }}" data-event="event-1">
+                                <a href="#0">
+                                    <em class="event-name">Reservado</em>
+                                </a>
+                            </li>
+
+                        {% endfor %}
+
+                    </ul>
+                </li>
+
+                <li class="events-group">
+                    <div class="top-info"><span>Martes</span></div>
+
+                    <ul>
+                        {% for reserva in martes %}
+
+                            <li class="single-event" data-start="{{ reserva.inicio|time }}"
+                                data-end="{{ reserva.final|time }}" data-event="event-1">
+                                <a href="#0">
+                                    <em class="event-name">Reservado</em>
+                                </a>
+                            </li>
+
+                        {% endfor %}
+                    </ul>
+                </li>
+
+                <li class="events-group">
+                    <div class="top-info"><span>Miércoles</span></div>
+
+                    <ul>
+                        {% for reserva in miercoles %}
+
+                            <li class="single-event" data-start="{{ reserva.inicio|time }}"
+                                data-end="{{ reserva.final|time }}" data-event="event-1">
+                                <a href="#0">
+                                    <em class="event-name">Reservado</em>
+                                </a>
+                            </li>
+
+                        {% endfor %}
+                    </ul>
+                </li>
+
+                <li class="events-group">
+                    <div class="top-info"><span>Jueves</span></div>
+
+                    <ul>
+                        {% for reserva in jueves %}
+
+                            <li class="single-event" data-start="{{ reserva.inicio|time }}"
+                                data-end="{{ reserva.final|time }}" data-event="event-1">
+                                <a href="#0">
+                                    <em class="event-name">Reservado</em>
+                                </a>
+                            </li>
+
+                        {% endfor %}
+                    </ul>
+                </li>
+
+                <li class="events-group">
+                    <div class="top-info"><span>Viernes</span></div>
+
+                    <ul>
+                        {% for reserva in viernes %}
+
+                            <li class="single-event" data-start="{{ reserva.inicio|time }}"
+                                data-end="{{ reserva.final|time }}" data-event="event-1">
+                                <a href="#0">
+                                    <em class="event-name">Reservado</em>
+                                </a>
+                            </li>
+
+                        {% endfor %}
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="event-modal">
+            <header class="header">
+                <div class="content">
+                    <span class="event-date"></span>
+                    <h3 class="event-name"></h3>
+                </div>
+
+                <div class="header-bg"></div>
+            </header>
+
+            <div class="body">
+                <div class="event-info"></div>
+                <div class="body-bg"></div>
+            </div>
+
+            <a href="#0" class="close">Close</a>
+        </div>
+
+        <div class="cover-layer"></div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-3 ml-auto">
+                <form method="GET">
+                    <input style="display:none" type="text" name="espacio" value="{{ seleccionado.id }}">
+                    <input style="display:none" type="text" name="delta" value="{{ deltaSub }}">
+                    <input class="form-control" type="submit" value="<<<">
+                </form>
+            </div>
+
+            <div class="col-3">
+                <form method="GET">
+                    <input style="display:none" type="text" name="espacio" value="{{ seleccionado.id }}">
+                    <input style="display:none" type="text" name="delta" value="0">
+                    <input class="form-control" type="submit" value="Semana actual">
+                </form>
+            </div>
+
+            <div class="col-3 mr-auto">
+                <form method="GET">
+                    <input style="display:none" type="text" name="espacio" value="{{ seleccionado.id }}">
+                    <input style="display:none" type="text" name="delta" value="{{ deltaPlus }}">
+                    <input class="form-control" type="submit" value=">>>">
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="{% static 'js/modernizr.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script>
+        if (!window.jQuery) document.write('<script src="js/jquery-3.0.0.min.js"><\/script>');
+    </script>
+    <script src="{% static 'js/main.js' %}"></script> <!-- Resource jQuery -->
+{% endblock %}

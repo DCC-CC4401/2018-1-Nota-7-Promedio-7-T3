@@ -1,21 +1,41 @@
-from django.shortcuts import render
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from userprofile.forms import SignUpForm
 from userprofile.models import Perfil
 from userlanding.views import busqueda
+from adminlanding.views import reservas
 from django.contrib.auth import views as auth_views
-from django.http import HttpResponse, HttpResponseNotFound
+from reservas.models import ReservaArticulo
+from reservas.models import ReservaEspacio
+from prestamos.models import PrestamoArticulo
+from prestamos.models import PrestamoEspacio
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+from django.shortcuts import render, redirect
 
-# Create your views here.
+
 
 def perfilUsuario(request):
+    if not request.user.is_authenticated: return redirect('/home/')
+    if request.method == 'POST':
+        if 'borrararticulo' in request.POST:
+            ReservaArticulo.objects.filter(pk=request.POST.get("id", "")).delete()
+        elif 'borrarespacio' in request.POST:
+            ReservaEspacio.objects.filter(pk=request.POST.get("id", "")).delete()
+
+
     perfil = Perfil.objects.get(correo=request.user.id)
-    context ={'perfil': perfil}
-    return render(request, 'vista_perfil.html', context)
+    reservasArticulos = ReservaArticulo.objects.filter(perfil__correo=perfil.correo).order_by('inicio')
+    reservasEspacios = ReservaEspacio.objects.filter(perfil__correo=perfil.correo).order_by('inicio')
+    lista_reservas = list(reservasArticulos) + list(reservasEspacios)
+    lista_reservas = sorted(lista_reservas, key=lambda x: x.inicio)[0:10][::-1]
+    prestamosArticulos = PrestamoArticulo.objects.filter(reserva__perfil__correo=perfil.correo).order_by('reserva__inicio')
+    prestamosEspacios = PrestamoEspacio.objects.filter(reserva__perfil__correo=perfil.correo).order_by('reserva__inicio')
+    lista_prestamos = list(prestamosArticulos) + list(prestamosEspacios)
+    lista_prestamos = sorted(lista_prestamos, key=lambda x: x.reserva.inicio)[0:10][::-1]
+    context ={'perfil': perfil, 'reservas': lista_reservas, 'prestamos':lista_prestamos}
+    return render(request, 'perfil/vista_perfil.html', context)
+
 
 def signup(request):
     if request.method == 'POST':
@@ -26,10 +46,7 @@ def signup(request):
             user.perfil.nombre = form.cleaned_data.get('nombre')
             user.perfil.rut = form.cleaned_data.get('rut')
             user.save()
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=user.username, password=raw_password)
-            login(request, user)
-            return redirect('login')
+            return redirect('/exito/')
     else:
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
@@ -38,11 +55,29 @@ def signup(request):
 def index(request):
     if request.user.is_authenticated:
         if request.user.is_superuser:
-            return HttpResponseNotFound('<h1>Page not found</h1>')
+            return reservas(request)
         else:
             return busqueda(request)
     else:
         return auth_views.login(request)
 
+
 def redirectToHome(request):
-    return redirect('home')
+    return redirect('/home/')
+
+def change_password(request):
+    perfil = Perfil.objects.get(correo=request.user.id)
+    if not request.user.is_authenticated: return redirect('/home/')
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    context ={'perfil': perfil, 'form': form}
+    return render(request, 'registration/change_password.html', context)
