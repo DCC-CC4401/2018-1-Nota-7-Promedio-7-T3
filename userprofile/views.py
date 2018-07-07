@@ -66,6 +66,7 @@ def redirectToHome(request):
     return redirect('/home/')
 
 def change_password(request):
+    perfil = Perfil.objects.get(correo=request.user.id)
     if not request.user.is_authenticated: return redirect('/home/')
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -78,6 +79,5 @@ def change_password(request):
             messages.error(request, 'Please correct the error below.')
     else:
         form = PasswordChangeForm(request.user)
-    return render(request, 'registration/change_password.html', {
-        'form': form
-    })
+    context ={'perfil': perfil, 'form': form}
+    return render(request, 'registration/change_password.html', context)
