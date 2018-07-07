@@ -1,15 +1,16 @@
-{% extends "Layouts/GeneralLayout.html" %}
+﻿{% extends "Layouts/GeneralLayout.html" %}
 {% load static %}
 
 {% block cabeza %}
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/reset.css' %}"> <!-- CSS reset -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Resource style -->
-    <title>Title</title>
+    <meta charset="UTF-8">
+    <title>Grilla de Horarios</title>
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-1" style="margin-top: 250px">
                 <button type="button" class="btn btn-primary">Usuarios</button>
