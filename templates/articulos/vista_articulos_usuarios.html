@@ -1,7 +1,14 @@
 {% extends "Layouts/GeneralLayout.html" %}
+{% load static %}
+{% load bootstrap4 %}
+
 {% block cabeza %}
-    <meta charset="UTF-8">
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}"> <!-- CSS reset -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Resource style -->
     <title>{{ articulo.nombre_articulo }}</title>
+
     <style>
         /*Color del texto en el estado, aparece como no usado, pero se llama al renderizar*/
         .Disponible {
@@ -40,14 +47,7 @@
         /*-------------------*/
     </style>
 {% endblock %}
-
 {% block content %}
-    {% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
-    {% bootstrap_css %}         {# Embed Bootstrap CSS #}
-    {% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
-    {% block extrahead %}       {# Extra Resources Start #}
-        {{ form.media }}            {# Form required JS and CSS #}
-    {% endblock %}              {# Extra Resources End #}
     <div class="container">
     <div class="row">
         <!-- Left Column -->
