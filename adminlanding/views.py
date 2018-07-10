@@ -55,8 +55,8 @@ def reservas(request):
                 context = {'perfil': perfil, 'lista_reservas': lista_reservas, 'lista_prestamos': lista_prestamos}
                 return render(request, 'admin_landing/admin_reservas.html', context)
             elif 'filtro' in request.POST:
-                prestamos_articulos = PrestamoArticulo.objects.filter(estado_reserva=request.POST.get("filtro",""))
-                prestamos_espacios = PrestamoEspacio.objects.filter(estado_reserva=request.POST.get("filtro",""))
+                prestamos_articulos = PrestamoArticulo.objects.filter(estado_prestamo=request.POST.get("filtro",""))
+                prestamos_espacios = PrestamoEspacio.objects.filter(estado_prestamo=request.POST.get("filtro",""))
                 lista_prestamos = list(prestamos_articulos) + list(prestamos_espacios)
                 context = {'perfil': perfil, 'lista_reservas': lista_reservas, 'lista_prestamos': lista_prestamos}
                 return render(request, 'admin_landing/admin_reservas.html', context)
@@ -67,13 +67,13 @@ def reservas(request):
                     if 'ReservaArticulo' in info:
                         reserva = ReservaArticulo.objects.get(pk=info[0])
                         reserva.estado_reserva = 2
-                        query = PrestamoArticulo(reserva=reserva, administrador=perfil, estado_reserva=1)
+                        query = PrestamoArticulo(reserva=reserva, administrador=perfil, estado_prestamo=1)
                         query.save()
                         reserva.save()
                     else:
                         reserva = ReservaEspacio.objects.get(pk=info[0])
                         reserva.estado_reserva = 2
-                        query = PrestamoEspacio(reserva=reserva, administrador=perfil, estado_reserva=1)
+                        query = PrestamoEspacio(reserva=reserva, administrador=perfil, estado_prestamo=1)
                         query.save()
                         reserva.save()
                 return HttpResponseRedirect('/administracion/reservas/')
@@ -134,7 +134,7 @@ def grilla(request):
     perfil = Perfil.objects.get(correo=request.user.id)
 
     context = {'espacios': todo_espacios, 'seleccionado': espacio_seleccionado, 'deltaPlus': delta + 1,
-               'deltaSub': delta - 1, 'semana': semana, 'lunes': reservas_mon, 'martes': reservas_tue,
+               'deltaSub': delta - 1, 'deltaPlus4': delta + 4, 'deltaSub4': delta - 4, 'semana': semana, 'lunes': reservas_mon, 'martes': reservas_tue,
                'miercoles': reservas_wed, 'jueves': reservas_thu, 'viernes': reservas_fri, 'perfil': perfil}
 
     return render(request, 'admin_landing/admin_grilla.html', context)
