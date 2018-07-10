@@ -65,9 +65,9 @@
                                 </div></td>
                                 <td>{{ reserva.id }}</td>
                                 {% if reserva.get_cname == 'ReservaArticulo' %}
-                                <td>{{ reserva.articulo.nombre_articulo }}</td>
+                                <td><a href="/articulos/{{ reserva.articulo.id }}">{{ reserva.articulo.nombre_articulo }}</a></td>
                                 {% else %}
-                                <td>{{ reserva.espacio.nombre_espacio }}</td>
+                                <td><a href="#">{{ reserva.espacio.nombre_espacio }}</a></td>
                                 {% endif %}
                                 <td>{{ reserva.perfil.nombre }}</td>
                                 <td>{{ reserva.inicio }}</td>
@@ -109,9 +109,9 @@
                                 </div></td>
                                 <td>{{ prestamo.id }}</td>
                                 {% if prestamo.reserva.get_cname == 'ReservaArticulo' %}
-                                <td>{{ prestamo.reserva.articulo.nombre_articulo }}</td>
+                                    <td><a href="/articulos/{{ prestamo.reserva.articulo.id }}">{{ prestamo.reserva.articulo.nombre_articulo }}</a></td>
                                 {% else %}
-                                <td>{{ prestamo.reserva.espacio.nombre_espacio }}</td>
+                                    <td><a href="#">{{ prestamo.reserva.espacio.nombre_espacio }}</a></td>
                                 {% endif %}
                                 <td>{{ prestamo.reserva.perfil.nombre }}</td>
                                 <td>{{ prestamo.reserva.inicio }}</td>
