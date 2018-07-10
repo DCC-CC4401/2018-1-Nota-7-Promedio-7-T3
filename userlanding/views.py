@@ -117,7 +117,7 @@ def espacios(request):
     perfil = Perfil.objects.get(correo=request.user.id)
 
     context = {'espacios': todo_espacios, 'seleccionado': espacio_seleccionado, 'deltaPlus': delta + 1,
-               'deltaSub': delta - 1, 'semana': semana, 'lunes': reservas_mon, 'martes': reservas_tue,
+               'deltaSub': delta - 1, 'deltaPlus4': delta+4, 'deltaSub4': delta-4, 'semana': semana, 'lunes': reservas_mon, 'martes': reservas_tue,
                'miercoles': reservas_wed, 'jueves': reservas_thu, 'viernes': reservas_fri, 'perfil': perfil}
 
     return render(request, 'user_landing/busqueda_espacios.html', context)

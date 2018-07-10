@@ -200,11 +200,20 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-3 ml-auto">
+
+            <div class="col-2 ml-auto">
+                <form method="GET">
+                    <input style="display:none" type="text" name="espacio" value="{{ seleccionado.id }}">
+                    <input style="display:none" type="text" name="delta" value="{{ deltaSub4 }}">
+                    <input class="form-control" type="submit" value="<<<">
+                </form>
+            </div>
+
+            <div class="col-2 ml-auto">
                 <form method="GET">
                     <input style="display:none" type="text" name="espacio" value="{{ seleccionado.id }}">
                     <input style="display:none" type="text" name="delta" value="{{ deltaSub }}">
-                    <input class="form-control" type="submit" value="<<<">
+                    <input class="form-control" type="submit" value="<">
                 </form>
             </div>
 
@@ -216,10 +225,18 @@
                 </form>
             </div>
 
-            <div class="col-3 mr-auto">
+            <div class="col-2 mr-auto">
                 <form method="GET">
                     <input style="display:none" type="text" name="espacio" value="{{ seleccionado.id }}">
                     <input style="display:none" type="text" name="delta" value="{{ deltaPlus }}">
+                    <input class="form-control" type="submit" value=">">
+                </form>
+            </div>
+
+            <div class="col-2 mr-auto">
+                <form method="GET">
+                    <input style="display:none" type="text" name="espacio" value="{{ seleccionado.id }}">
+                    <input style="display:none" type="text" name="delta" value="{{ deltaPlus4 }}">
                     <input class="form-control" type="submit" value=">>>">
                 </form>
             </div>
