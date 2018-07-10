@@ -80,9 +80,15 @@ def reservas(request):
             elif 'rechazar' in request.POST:
                 presionados = request.POST.getlist('checks[]')
                 for marcado in presionados:
-                    reserva=ReservaArticulo.objects.get(pk=marcado)
-                    reserva.estado_reserva = 3
-                    reserva.save()
+                    info = marcado.split(" ")
+                    if 'ReservaArticulo' in info:
+                        reserva = ReservaArticulo.objects.get(pk=info[0])
+                        reserva.estado_reserva = 3
+                        reserva.save()
+                    else:
+                        reserva = ReservaEspacio.objects.get(pk=info[0])
+                        reserva.estado_reserva = 3
+                        reserva.save()
                     return HttpResponseRedirect('/administracion/reservas/')
         else:
             context = {'perfil': perfil, 'lista_reservas': lista_reservas, 'lista_prestamos': lista_prestamos}
