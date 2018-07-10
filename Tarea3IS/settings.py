@@ -42,9 +42,7 @@ INSTALLED_APPS = [
     'userprofile.apps.UserprofileConfig',
     'reservas.apps.ReservasConfig',
     'prestamos.apps.PrestamosConfig',
-    'bootstrap4',
-    'django_tables2',
-    'bootstrap_datepicker_plus',
+    'bootstrap-4',
     'django_extensions'
 ]
 
